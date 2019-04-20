@@ -130,7 +130,7 @@ void Map::Init()
 	graph[0]  = MV1LoadModel("data/field/grass.x");
 	graph[1]  = MV1LoadModel("data/field/wall.x");
 	graph[2]  = MV1LoadModel("data/field/warp.x");
-	sky_model = MV1LoadModel("data/model/Skydome_N8/Dome_N802.x");
+	sky_model = MV1LoadModel("data/field/askyY/blue/askyY3_ao.x");
 	sky_graph = LoadGraph("data/field/sky.png");
 	for (int i = 0; i < 3; i++)
 	{
@@ -141,6 +141,7 @@ void Map::Init()
 	map_ground[1] = MV1DuplicateModel(graph[1]);
 	map_ground[2] = MV1DuplicateModel(graph[2]);
 	now_floor = 1;
+	sky_move_x = 0.0f;
 }
 
 void Map::Draw(int map_data[BATTLE_MAP_CHIP][BATTLE_MAP_CHIP])
@@ -179,20 +180,11 @@ void Map::Cloud_M_Move()
 
 void Map::Sky_Draw()
 {
-	DrawGraph(0, 0, sky_graph, true);
-	for (int i = 0; i < 3; i++)
-	{
-		cloud_pos[i].x -= 0.5f;
-		if (cloud_pos[i].x < -2000.0f)
-		{
-			cloud_pos[i].x = 4000.0f;
-		}
-		if (cloud_pos[i].x > 4000.0f)
-		{
-			cloud_pos[i].x = -2000.0f;
-		}
-		DrawGraph((int)cloud_pos[i].x, (int)cloud_pos[i].y, cloud_graph[0], true);
-	}
+	MV1SetPosition(sky_model, VGet(50.f*10, 0.f, 50.f*10));
+	MV1SetScale(sky_model, VGet(3.0f, 3.0f, 3.0f));
+	MV1SetRotationXYZ(sky_model, VGet(0.0f, sky_move_x, 0.0f));
+	sky_move_x -= 0.0005f;
+	MV1DrawModel(sky_model);
 }
 
 void Map::Field_Draw(Effect *effect)

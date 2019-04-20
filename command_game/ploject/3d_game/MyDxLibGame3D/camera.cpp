@@ -6,7 +6,7 @@
 Camera::Camera()
 {
 	//奥行0.1～1000までをカメラの描画範囲とする
-	SetCameraNearFar(10.0000f, 1000.000f);
+	SetCameraNearFar(10.0000f, 10000.000f);
 	f_pos = VectorGet(50.0f * BATTLE_MAP_CHIP / 2, 15.f, 50.0f * BATTLE_MAP_CHIP / 2 - 30.f);
 	up = VectorGet(0.f, 1.f, 0.f);
 	// カメラの回転値を初期化
