@@ -26,6 +26,7 @@ public:
 	float dir_angle_plas;//Œü‚¢‚Ä‚éŒü‚«‚É‰ÁZ
 	int vertical_dir;//‘OŒã‚ÌŒü‚«
 	int heng_dir;//¶‰E‚ÌŒü‚«
+	bool menu_open_flag;
 	bool left_turn_flag;
 	bool right_turn_flag;
 	bool ahead_turn_flag;

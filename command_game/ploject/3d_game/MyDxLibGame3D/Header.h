@@ -1,6 +1,8 @@
+//Header.h
 #ifndef _HEADER_H_
 #define _HEADER_H_
 
+//いろんなヘッダーのまとめ
 #include "DxLib.h"
 #include "EffekseerForDXLib.h"
 #include <math.h>
@@ -22,6 +24,7 @@
 #include "Window.h"
 #include "Field.h"
 
+//function.cppで作った関数のプロトタイプ宣言
 void Turn_Around(float &now_dir, float max_dir, float speed_dir, bool &turn_flag);
 Chara Status_Get(std::string chara_name, char *file_name, Vector3 f_pos, Vector3 b_pos, float hp, float mp, float pow, float def, float m_pow, float m_res, float ski, float spd, bool ally_or_enemy_flag);
 Inventory Inventory_Have_Get(Inventory Inve[6], Inventory one, Inventory two, Inventory three, Inventory four, Inventory five, Inventory six);
@@ -51,6 +54,6 @@ Vector2 Vector_Normalize(Vector2 v);
 float Vector_Dot(Vector3 v1, Vector3 v2);
 Vector3 Vector_Cross(Vector3 v1, Vector3 v2);
 Vector3 Vector_Cross(Vector3 p1, Vector3 p2, Vector3 p3);
-
 void Debug_Vector3_Pos(Vector3 *pos, Vector3 *center_point,float pos_speed, float cen_speed);//デバッグ用
+
 #endif // _HEADER_H_
