@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+*.sdf
+*.sln
+*.db
+*.ipch
+*.vcxproj
+*.filters
