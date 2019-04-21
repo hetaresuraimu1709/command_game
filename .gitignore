@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+<<<<<<< HEAD
 *.sdf
 *.sln
 *.db
@@ -38,3 +39,16 @@
 *.filters
 *.efkproj
 *.efkmodel
+=======
+*.db
+*.sdf
+*.sln
+*.ilk
+*.pdb
+*.suo
+*.ipch
+*.vcxproj
+*.filters
+*.user
+*.opendb
+>>>>>>> master
