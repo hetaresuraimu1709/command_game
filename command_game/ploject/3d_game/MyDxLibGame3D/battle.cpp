@@ -588,6 +588,7 @@ void Battle::Damage_Calculation(Chara *chara_case, int damege_source, int damege
 							m_enemy[j].hp -= damege[i].damage;
                             if (m_enemy[j].hp <= 0)
                             {
+								m_enemy[j].hp = 0;
                                 m_enemy[j].die_flag = true;
                             }
                         }
@@ -633,6 +634,7 @@ void Battle::Damage_Calculation(Chara *chara_case, int damege_source, int damege
                             m_ally[j].hp -= damege[i + 3].damage;
                             if (m_ally[j].hp <= 0)
                             {
+								m_ally[j].hp = 0;
                                 m_ally[j].die_flag = true;
                             }
                         }

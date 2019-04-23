@@ -41,27 +41,82 @@ void Enemy::Battle_AI(Battle *battle)
 		if (battle->m_enemy[i].name_origin == "スライム")
 		{
 			battle->m_enemy[i].second_behavior_flag[battle->attack] = true;
-			battle->m_enemy[i].who_command_flag[0] = true;
+			int hp = 0;
+			for (int j = 0; j < 3; j++)
+			{
+				if (hp < battle->m_ally[j].hp)
+				{
+					hp = battle->m_ally[j].hp;
+					battle->m_enemy[i].who_command_flag[0] = false;
+					battle->m_enemy[i].who_command_flag[1] = false;
+					battle->m_enemy[i].who_command_flag[2] = false;
+					battle->m_enemy[i].who_command_flag[j] = true;
+				}
+			}
         }
         if (battle->m_enemy[i].name_origin == "スライムベス")
         {
 			battle->m_enemy[i].second_behavior_flag[battle->attack] = true;
-			battle->m_enemy[i].who_command_flag[1] = true;
+			int hp = 0;
+			for (int j = 0; j < 3; j++)
+			{
+				if (hp < battle->m_ally[j].hp)
+				{
+					hp = battle->m_ally[j].hp;
+					battle->m_enemy[i].who_command_flag[0] = false;
+					battle->m_enemy[i].who_command_flag[1] = false;
+					battle->m_enemy[i].who_command_flag[2] = false;
+					battle->m_enemy[i].who_command_flag[j] = true;
+				}
+			}
         }
         if (battle->m_enemy[i].name_origin == "メタルスライム")
         {
 			battle->m_enemy[i].second_behavior_flag[battle->attack] = true;
-			battle->m_enemy[i].who_command_flag[2] = true;
+			int hp = 0;
+			for (int j = 0; j < 3; j++)
+			{
+				if (hp < battle->m_ally[j].hp)
+				{
+					hp = battle->m_ally[j].hp;
+					battle->m_enemy[i].who_command_flag[0] = false;
+					battle->m_enemy[i].who_command_flag[1] = false;
+					battle->m_enemy[i].who_command_flag[2] = false;
+					battle->m_enemy[i].who_command_flag[j] = true;
+				}
+			}
 		}
         if (battle->m_enemy[i].name_origin == "ライムスライム")
         {
 			battle->m_enemy[i].second_behavior_flag[battle->attack] = true;
-			battle->m_enemy[i].who_command_flag[0] = true;
+			int hp = 0;
+			for (int j = 0; j < 3; j++)
+			{
+				if (hp < battle->m_ally[j].hp)
+				{
+					hp = battle->m_ally[j].hp;
+					battle->m_enemy[i].who_command_flag[0] = false;
+					battle->m_enemy[i].who_command_flag[1] = false;
+					battle->m_enemy[i].who_command_flag[2] = false;
+					battle->m_enemy[i].who_command_flag[j] = true;
+				}
+			}
         }
         if (battle->m_enemy[i].name_origin == "レモンスライム")
         {
 			battle->m_enemy[i].second_behavior_flag[battle->attack] = true;
-			battle->m_enemy[i].who_command_flag[1] = true;
+			int hp = 0;
+			for (int j = 0; j < 3; j++)
+			{
+				if (hp < battle->m_ally[j].hp)
+				{
+					hp = battle->m_ally[j].hp;
+					battle->m_enemy[i].who_command_flag[0] = false;
+					battle->m_enemy[i].who_command_flag[1] = false;
+					battle->m_enemy[i].who_command_flag[2] = false;
+					battle->m_enemy[i].who_command_flag[j] = true;
+				}
+			}
         }
      }
 }
