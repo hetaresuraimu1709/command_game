@@ -15,7 +15,7 @@ Player::Player(Memory memory)
             //初期バトル座標
             VectorGet(50.0f * BATTLE_MAP_CHIP / 2 - 50, 0.0f, 50.0f * BATTLE_MAP_CHIP / 2),
             //HP,MP,攻撃,防御,攻撃魔力,回復魔力,きようさ,すばやさ
-            ALLY_1_FIRST_HP, ALLY_1_FIRST_MP, ALLY_1_FIRST_STR, ALLY_1_FIRST_DEF, ALLY_1_FIRST_MST, ALLY_1_FIRST_MHL, ALLY_1_FIRST_SKI, ALLY_1_FIRST_SPD, true);
+            ALLY_1_FIRST_HP, ALLY_1_FIRST_MP, ALLY_1_FIRST_STR, ALLY_1_FIRST_DEF, ALLY_1_FIRST_MST, ALLY_1_FIRST_MHL, ALLY_1_FIRST_SKI, ALLY_1_FIRST_SPD, 0,true);
         Inventory_Have_Get(c_ally[0].skill, memory.I_skill[memory.skill1], memory.I_skill[memory.skill2], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi]);
         Inventory_Have_Get(c_ally[0].magic, memory.I_spell[memory.spell1], memory.I_spell[memory.spell4], memory.I_spell[memory.spell7], memory.I_spell[memory.sp_nasi], memory.I_spell[memory.sp_nasi], memory.I_spell[memory.sp_nasi]);
         Inventory_Have_Get(c_ally[0].item, memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi]);
@@ -29,7 +29,7 @@ Player::Player(Memory memory)
             //初期バトル座標
             VectorGet(50.0f * BATTLE_MAP_CHIP / 2, 0.0f, 50.0f * BATTLE_MAP_CHIP / 2),
             //HP,MP,攻撃,防御,攻撃魔力,回復魔力,きようさ,すばやさ
-            ALLY_2_FIRST_HP, ALLY_2_FIRST_MP, ALLY_2_FIRST_STR, ALLY_2_FIRST_DEF, ALLY_2_FIRST_MST, ALLY_2_FIRST_MHL, ALLY_2_FIRST_SKI, ALLY_2_FIRST_SPD, true);
+            ALLY_2_FIRST_HP, ALLY_2_FIRST_MP, ALLY_2_FIRST_STR, ALLY_2_FIRST_DEF, ALLY_2_FIRST_MST, ALLY_2_FIRST_MHL, ALLY_2_FIRST_SKI, ALLY_2_FIRST_SPD, 0,true);
         Inventory_Have_Get(c_ally[1].skill, memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi]);
         Inventory_Have_Get(c_ally[1].magic, memory.I_spell[memory.spell1], memory.I_spell[memory.spell4], memory.I_spell[memory.spell7], memory.I_spell[memory.sp_nasi], memory.I_spell[memory.sp_nasi], memory.I_spell[memory.sp_nasi]);
         Inventory_Have_Get(c_ally[1].item, memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi]);
@@ -43,7 +43,7 @@ Player::Player(Memory memory)
             //初期バトル座標
             VectorGet(50.0f * BATTLE_MAP_CHIP / 2 + 50, 0.0f, 50.0f * BATTLE_MAP_CHIP / 2),
             //HP,MP,攻撃,防御,攻撃魔力,回復魔力,きようさ,すばやさ
-            ALLY_3_FIRST_HP, ALLY_3_FIRST_MP, ALLY_3_FIRST_STR, ALLY_3_FIRST_DEF, ALLY_3_FIRST_MST, ALLY_3_FIRST_MHL, ALLY_3_FIRST_SKI, ALLY_3_FIRST_SPD, true);
+            ALLY_3_FIRST_HP, ALLY_3_FIRST_MP, ALLY_3_FIRST_STR, ALLY_3_FIRST_DEF, ALLY_3_FIRST_MST, ALLY_3_FIRST_MHL, ALLY_3_FIRST_SKI, ALLY_3_FIRST_SPD, 0,true);
         Inventory_Have_Get(c_ally[2].skill, memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi]);
         Inventory_Have_Get(c_ally[2].magic, memory.I_spell[memory.spell1], memory.I_spell[memory.spell4], memory.I_spell[memory.spell7], memory.I_spell[memory.sp_nasi], memory.I_spell[memory.sp_nasi], memory.I_spell[memory.sp_nasi]);
         Inventory_Have_Get(c_ally[2].item, memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi], memory.I_item[memory.it_nasi]);
@@ -59,7 +59,7 @@ Player::Player(Memory memory)
 		AnimNowTime = 0.f;
 		MV1SetAttachAnimTime(c_ally[i].modelHandle, AnimAttachIndex[i], AnimNowTime);
 	}
-	hoge_chara = Status_Get("エラー！", "", VectorGet(0.0f, 0.0f, 0.0f), VectorGet(0.0f, 0.0f, 0.0f), -1, -1, -1, -1, -1, -1, -1, -1, false);
+	hoge_chara = Status_Get("エラー！", "", VectorGet(0.0f, 0.0f, 0.0f), VectorGet(0.0f, 0.0f, 0.0f), -1, -1, -1, -1, -1, -1, -1, -1, -1,false);
 }
 
 void Player::Init()

@@ -81,7 +81,7 @@ void Turn_Around(float &now_dir, float aim_dir, float speed_dir, bool &turn_flag
 }
 
 //ステータス代入
-Chara Status_Get(std::string chara_name, char *file_name, Vector3 f_pos, Vector3 b_pos,float hp, float mp, float pow, float def, float m_pow, float m_res, float ski, float spd, bool ally_or_enemy_flag)
+Chara Status_Get(std::string chara_name, char *file_name, Vector3 f_pos, Vector3 b_pos,float hp, float mp, float pow, float def, float m_pow, float m_res, float ski, float spd, int exp,bool ally_or_enemy_flag)
 {
 	Chara name;
 	name.modelHandle		= MV1LoadModel(file_name);
@@ -101,6 +101,7 @@ Chara Status_Get(std::string chara_name, char *file_name, Vector3 f_pos, Vector3
 	name.m_res				= m_res;
 	name.ski				= ski;
 	name.spd				= spd;
+	name.exp				= exp;
 	name.ally_or_enemy_flag = ally_or_enemy_flag;
 	//name.ally_or_enemy_flag = false;
 	name.first_command_flag = false;

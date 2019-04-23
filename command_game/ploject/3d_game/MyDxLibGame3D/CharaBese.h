@@ -31,6 +31,7 @@ public:
 	float m_res;				//回復魔力
 	float ski;					//器用さ
 	float spd;					//素早さ
+	int exp;					//経験値量
 	bool ally_or_enemy_flag;//味方か敵かのフラグ＜true→味方　false→敵＞
 	//最初のコマンドフラグ
 	bool first_command_flag;//最初のコマンドを打ったかどうかのフラグ

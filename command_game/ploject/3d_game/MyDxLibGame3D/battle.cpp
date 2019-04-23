@@ -42,7 +42,7 @@ void Battle::Key_Anim(int number)
 Chara Battle::No_1_Speed_Get(Chara *speed0, Chara *speed1, Chara *speed2, Chara *speed3, Chara *speed4, Chara *speed5, Chara *speed6)
 {
 	Chara chara_hoge;
-	chara_hoge = Status_Get("エラー！", "", VectorGet(0.0f, 0.0f, 0.0f), VectorGet(0.0f, 0.0f, 0.0f), -1, -1, -1, -1, -1, -1, -1, -1, false);
+	chara_hoge = Status_Get("エラー！", "", VectorGet(0.0f, 0.0f, 0.0f), VectorGet(0.0f, 0.0f, 0.0f), -1, -1, -1, -1, -1, -1, -1, -1, -1,false);
 	Chara chara_base[7] = { *speed0,*speed1,*speed2,*speed3,*speed4,*speed5,*speed6 };
 	for (int i = 0; i < 7; i++)
 	{
@@ -1170,6 +1170,7 @@ void Battle::Init(Camera *camera, Player *player)
     turn_count = 1;
 	command_play_count = 0;
 	reset_command_pos_flag = false;
+	rast_count = 0;
 	Flag_Reset();
 	camera->Flag_Reset(*player);
 }
@@ -1272,13 +1273,24 @@ void Battle::Updata(int *scene, Player *player, Enemy *enemy, Camera *camera, Ma
 		//決定キーを押したら
 		if (getKey(KEY_INPUT_RETURN) == KEY_STATE_PUSHDOWN)
 		{
-			//キャラのステータス継承
-			for (int i = 0; i < 3; i++)
+			rast_count++;
+			if (rast_count == 1)
 			{
-				player->c_ally[i] = m_ally[i];
+				for (int i = 0; i < 3; i++)
+				{
+					m_ally[i].exp += m_enemy[0].exp + m_enemy[1].exp + m_enemy[2].exp + m_enemy[3].exp;
+				}
 			}
-			//シーンをフィールドに戻す
-			*scene = s_field;
+			else if (rast_count > 100)
+			{
+				//キャラのステータス継承
+				for (int i = 0; i < 3; i++)
+				{
+					player->c_ally[i] = m_ally[i];
+				}
+				//シーンをフィールドに戻す
+				*scene = s_field;
+			}
 		}
 	}
 }
@@ -1293,6 +1305,7 @@ void Battle::Draw(int *scene, Player *player, Enemy *enemy, Map *map, Camera *ca
 	map->Battle_Draw();
 	player->BattleDraw(*this);
 	enemy->Battle_Draw(*this, effect);
+	float rate = 0.8f;
 
 	if(!end_flag)
 	{
@@ -1319,8 +1332,6 @@ void Battle::Draw(int *scene, Player *player, Enemy *enemy, Map *map, Camera *ca
 		    Command_Smooth(&command_pos[1], VectorGet(10.0f, 10.0f), KEY_SPEED);
 		    //キャラのステータス
 			window->Command_Draw(command_pos[1].x, command_pos[1].y, STATUS_COMMAND_SIZE_X, STATUS_COMMAND_SIZE_Y);
-			//DrawGraph((int)command_pos[1].x, (int)command_pos[1].y, status_command_graph, TRUE);
-			float rate = 0.8f;
 			for (int i = 0; i < 3; i++)
 			{
 				Vector2 pos = VectorGet((float)(command_pos[1].x + 120 + (i * 290)), (float)(command_pos[1].y + 70));
@@ -1376,8 +1387,24 @@ void Battle::Draw(int *scene, Player *player, Enemy *enemy, Map *map, Camera *ca
 	}
 	else
 	{
-		comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_enemy[0].name);
-		std::size_t name_num = m_enemy[0].name.size() / 2;
-		comment->Draw((float)(command_pos[0].x + 300 + (name_num * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "たちをやっつけた！");
+		if (rast_count == 0)
+		{
+			comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_enemy[0].name);
+			std::size_t name_num = m_enemy[0].name.size() / 2;
+			comment->Draw((float)(command_pos[0].x + 300 + (name_num * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "たちをやっつけた！");
+		}
+		if (rast_count == 1)
+		{
+			comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[0].name);
+			std::size_t name_num = m_ally[0].name.size() / 2;
+			comment->Draw((float)(command_pos[0].x + 300 + (name_num * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "たちは");
+			int exp = 0;
+			for (int i = 0; i < 4; i++)
+			{
+				exp += m_enemy[i].exp;
+			}
+			Count_Draw_2D(count_graph, exp, (float)(command_pos[0].x + 300 + (name_num * STRING_SIZE_W) + 150), (float)(command_pos[0].y + 30));
+			comment->Draw((float)(command_pos[0].x + 300 + (name_num * STRING_SIZE_W) + 250), (float)(command_pos[0].y + 30), "けいけんちをかくとく！");
+		}
 	}
 }

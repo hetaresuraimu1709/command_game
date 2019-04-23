@@ -90,6 +90,7 @@ private:
 	int key_count[4];															//’·‰Ÿ‚µ
     int rand_count;                                                             //ƒ‰ƒ“ƒ_ƒ€‚Åg‚¤‚æ‚¤‚Ì•Ï”
 	bool end_flag;
+	int rast_count;
 };
 
 #endif // _BATTLE_H_
