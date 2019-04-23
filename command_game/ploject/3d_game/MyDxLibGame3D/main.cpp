@@ -13,7 +13,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	// 画面モードのセット
 	ChangeWindowMode(TRUE);
 	SetGraphMode(1920, 1080, 16);
-	SetWindowSizeExtendRate(0.5, 0.5);
+	//SetWindowSizeExtendRate(0.5, 0.5);
 
 	//描画先を裏画面に変更する。
 	SetDrawScreen(DX_SCREEN_BACK);
@@ -71,6 +71,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	c_battle->Init(c_camera, c_player);
 	Music *c_music = new Music();
 	Window *c_window = new Window();
+	Field *c_field = new Field();
+	c_field->Init();
 	//Npc *c_npc = new Npc();
 	//c_npc->Init();
 	int scene = s_title;
@@ -104,11 +106,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			c_player->EnemyHit(&scene, c_enemy, c_battle, c_camera);
 			c_camera->Move(*c_player, c_map);
 			c_player->VectorReset();
+			c_field->Updata(c_player);
 			break;
 		case s_battle:
 			c_battle->Updata(&scene, c_player, c_enemy, c_camera, c_map, c_music);
-			/*c_battle->Commanding(c_player, c_enemy, c_camera, c_map,*c_music);
-			c_battle->Playing(c_player, c_enemy, c_camera);*/
 			break;
 		case s_end:
 			c_end->Move(&scene);
@@ -138,6 +139,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			c_player->Draw();
 			c_enemy->Draw(*c_map);
 			c_effect->Draw(&c_effect->warp, 1500000000);
+			c_field->Draw(c_player, c_string, c_window);
 			break;
 		case s_battle:
 			c_music->field_theme_Stop();

@@ -86,6 +86,7 @@ void Player::Init()
 	vertical_dir = nodir;
 	heng_dir = nodir;
 	c_ally[0].vec = VectorGet(0.0f, 0.0f, 0.0f);
+	menu_open_flag = false;
 }
 
 void Player::Turn_Reset()
