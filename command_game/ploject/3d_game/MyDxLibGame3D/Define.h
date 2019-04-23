@@ -143,8 +143,10 @@
 #define COMMAND_WINDOW_LINE_SIZE 10
 
 //メニュー画面のウィンドウサイズ
-#define MENU_WINDOW_SIZE_X 350.0f
-#define MENU_WINDOW_SIZE_Y 500.0f
+#define MENU_WINDOW_SIZE_X_0 350.0f
+#define MENU_WINDOW_SIZE_Y_0 550.0f
+#define MENU_WINDOW_SIZE_X_1 1000.0f
+#define MENU_WINDOW_SIZE_Y_1 400.0f
 
 struct Vector3
 {

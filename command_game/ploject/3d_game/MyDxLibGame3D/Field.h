@@ -14,7 +14,11 @@ public:
 	void Draw(Player * player, Comment_string * comment, Window * window);
 private:
 	void MenuWindow(Player *player);
-	Vector2 menu_pos;
+	int key_graph[8];
+	int counter;
+	int now_frame[1];
+	Vector2 menu_pos[4];
+	Vector2 key_pos[4];
 	std::string menu_1st_item[5];
 };
 

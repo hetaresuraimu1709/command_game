@@ -55,5 +55,16 @@ float Vector_Dot(Vector3 v1, Vector3 v2);
 Vector3 Vector_Cross(Vector3 v1, Vector3 v2);
 Vector3 Vector_Cross(Vector3 p1, Vector3 p2, Vector3 p3);
 void Debug_Vector3_Pos(Vector3 *pos, Vector3 *center_point,float pos_speed, float cen_speed);//デバッグ用
-
+//コマンド用関数
+bool Cursor(float pos, float max);
+void Move_Cursor(float *key_pos, unsigned char key_code, float max, int command_max, float move, int *count, Music music);
+void Set_Move_Cursor(float *key_pos, unsigned char key_code_1, unsigned char key_code_2, float max, int command_max, float move, int *count_1, int *count_2, Music music);
+void Decide_Command(Vector2 key_pos_1, Vector2 *key_pos_2, bool *command_flag, bool *behavior_flag, float max_y, float move_y, int comand_y, float max_x, float move_x, int comand_x, Vector2 setpos, Music music);
+void Command_Back(bool *behavior_flag, bool *command_flag, int max_command, Music music);
+void Command_Pos_Reset(Vector2 *command_origin_pos, Vector2 command_goal_pos, Vector2 *key_origin_pos, Vector2 key_goal_pos);
+void Count_Draw_2D(int *number_graph, int draw_count, float x, float y);
+void Count_Draw_2D(int *number_graph, int draw_count, float x, float y, float size_rate);
+void Count_Draw_3D(int *number_graph, int draw_count, float x, float y, float z);
+void Enemy_Count_Draw_3D(int *number_graph, int draw_count, float x, float y, float z);
+void Set_HPber(float pos_x, float pos_y, float rate, int color);
 #endif // _HEADER_H_
