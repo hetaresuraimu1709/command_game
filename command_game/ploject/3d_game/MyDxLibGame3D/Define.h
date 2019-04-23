@@ -145,6 +145,12 @@
 //メニュー画面のウィンドウサイズ
 #define MENU_WINDOW_SIZE_X_0 350.0f
 #define MENU_WINDOW_SIZE_Y_0 550.0f
+#define KEY_COMMAND_X_0 20
+#define KEY_COMMAND_Y_0 SCREEN_H - KEY_1ST_COMMAND_SIZE_Y - 50
+#define KEY_POS_X_0 5
+#define KEY_POS_Y_0 40
+#define KEY_MOVE_Y_0 100.0f
+#define KEY_MAX_COMMAND_0 5
 #define MENU_WINDOW_SIZE_X_1 1000.0f
 #define MENU_WINDOW_SIZE_Y_1 400.0f
 

@@ -100,13 +100,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			break;
 		case s_field:
 			//c_npc->Updata();
-			c_player->Move(c_camera, c_map);
-			c_player->Turn();
-			c_enemy->Move(*c_map, *c_player);
-			c_player->EnemyHit(&scene, c_enemy, c_battle, c_camera);
-			c_camera->Move(*c_player, c_map);
-			c_player->VectorReset();
-			c_field->Updata(c_player);
+			if (!c_player->menu_open_flag)
+			{
+				c_player->Move(c_camera, c_map);
+				c_player->Turn();
+				c_enemy->Move(*c_map, *c_player);
+				c_player->EnemyHit(&scene, c_enemy, c_battle, c_camera);
+				c_camera->Move(*c_player, c_map);
+				c_player->VectorReset();
+			}
+			c_field->Updata(c_player, *c_music);
 			break;
 		case s_battle:
 			c_battle->Updata(&scene, c_player, c_enemy, c_camera, c_map, c_music);
