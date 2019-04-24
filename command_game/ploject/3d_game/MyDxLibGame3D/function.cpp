@@ -102,6 +102,7 @@ Chara Status_Get(std::string chara_name, char *file_name, Vector3 f_pos, Vector3
 	name.ski				= ski;
 	name.spd				= spd;
 	name.exp				= exp;
+	name.exp_goal			= EXP_GOAL_1ST;
 	name.ally_or_enemy_flag = ally_or_enemy_flag;
 	//name.ally_or_enemy_flag = false;
 	name.first_command_flag = false;

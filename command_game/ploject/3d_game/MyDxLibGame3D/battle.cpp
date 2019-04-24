@@ -1228,6 +1228,71 @@ void Battle::Playing(Player *player, Enemy *enemy, Camera *camera)
 		}
 	}
 }
+void Level_Up(Chara *chara, int pattern)
+{
+	int hp_up_rate, mp_up_rate, pow_up_rate, def_up_rate, m_pow_up_rate, m_res_up_rate, ski_up_rate, spd_up_rate;
+	//ステータスの上がり方調節
+	switch (pattern)
+	{
+	case 0://戦士型（HP、攻撃、防御上がりやすい）
+		hp_up_rate = 2;
+		mp_up_rate = 5;
+		pow_up_rate = 2;
+		def_up_rate = 3;
+		m_pow_up_rate = 8;
+		m_res_up_rate = 8;
+		ski_up_rate = 5;
+		spd_up_rate = 6;
+		break;
+	case 1://魔法使い型（MP、攻魔、器用さ上がりやすい）
+		hp_up_rate = 6;
+		mp_up_rate = 2;
+		pow_up_rate = 6;
+		def_up_rate = 8;
+		m_pow_up_rate = 2;
+		m_res_up_rate = 4;
+		ski_up_rate = 3;
+		spd_up_rate = 8;
+		break;
+	case 2://僧侶型（MP、回魔、防御上がりやすい）
+		hp_up_rate = 4;
+		mp_up_rate = 3;
+		pow_up_rate = 5;
+		def_up_rate = 3;
+		m_pow_up_rate = 6;
+		m_res_up_rate = 2;
+		ski_up_rate = 6;
+		spd_up_rate = 5;
+		break;
+	case 3://盗賊型（攻撃、すばやさ、きようさ上がりやすい）
+		hp_up_rate = 6;
+		mp_up_rate = 4;
+		pow_up_rate = 3;
+		def_up_rate = 6;
+		m_pow_up_rate = 4;
+		m_res_up_rate = 4;
+		ski_up_rate = 2;
+		spd_up_rate = 3;
+		break;
+	default:
+		break;
+	}
+	if (chara->exp_goal < chara->exp)
+	{
+		chara->level++;
+		chara->max_hp += chara->max_hp / hp_up_rate;
+		chara->hp = chara->max_hp;
+		chara->max_mp += chara->max_mp / mp_up_rate;
+		chara->mp = chara->max_mp;
+		chara->pow += chara->pow / pow_up_rate;
+		chara->def += chara->def / def_up_rate;
+		chara->m_pow += chara->m_pow / m_pow_up_rate;
+		chara->m_res += chara->m_res / m_res_up_rate;
+		chara->ski = chara->ski / ski_up_rate;
+		chara->spd = chara->spd / spd_up_rate;
+		chara->exp_goal = ((chara->exp_goal * 2) + (chara->exp_goal / 2) + (chara->exp_goal % 2));
+	}
+}
 //************************************************************************
 // 動きのプログラムのまとめ
 //************************************************************************
@@ -1276,15 +1341,33 @@ void Battle::Updata(int *scene, Player *player, Enemy *enemy, Camera *camera, Ma
 		if (getKey(KEY_INPUT_RETURN) == KEY_STATE_PUSHDOWN)
 		{
 			rast_count++;
-			if (rast_count == 1)
+			switch (rast_count)
 			{
+			case 0:
+				break;
+			case 1:
 				for (int i = 0; i < 3; i++)
 				{
 					m_ally[i].exp += m_enemy[0].exp + m_enemy[1].exp + m_enemy[2].exp + m_enemy[3].exp;
 				}
-			}
-			else if (rast_count > 100)
-			{
+				break;
+			case 2:
+				if (m_ally[0].exp_goal < m_ally[0].exp)
+				{
+					Level_Up(&m_ally[0], 0);
+				}
+				else if(m_ally[1].exp_goal < m_ally[1].exp)
+				{
+					Level_Up(&m_ally[1], 1);
+				}
+				else if (m_ally[2].exp_goal < m_ally[2].exp)
+				{
+					Level_Up(&m_ally[2], 2);
+				}
+				break;
+			case 3:
+				break;
+			default:
 				//キャラのステータス継承
 				for (int i = 0; i < 3; i++)
 				{
@@ -1292,6 +1375,7 @@ void Battle::Updata(int *scene, Player *player, Enemy *enemy, Camera *camera, Ma
 				}
 				//シーンをフィールドに戻す
 				*scene = s_field;
+				break;
 			}
 		}
 	}
@@ -1389,24 +1473,45 @@ void Battle::Draw(int *scene, Player *player, Enemy *enemy, Map *map, Camera *ca
 	}
 	else
 	{
-		if (rast_count == 0)
+		std::size_t name_size = m_enemy[0].name.size() / 2;
+		int exp = 0;
+		switch (rast_count)
 		{
+		case 0:
 			comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_enemy[0].name);
-			std::size_t name_num = m_enemy[0].name.size() / 2;
-			comment->Draw((float)(command_pos[0].x + 300 + (name_num * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "たちをやっつけた！");
-		}
-		if (rast_count == 1)
-		{
+			comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "たちをやっつけた！");
+			break;
+		case 1:
 			comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[0].name);
-			std::size_t name_num = m_ally[0].name.size() / 2;
-			comment->Draw((float)(command_pos[0].x + 300 + (name_num * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "たちは");
-			int exp = 0;
+			name_size = m_ally[0].name.size() / 2;
+			comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "たちは");
 			for (int i = 0; i < 4; i++)
 			{
 				exp += m_enemy[i].exp;
 			}
-			Count_Draw_2D(count_graph, exp, (float)(command_pos[0].x + 300 + (name_num * STRING_SIZE_W) + 150), (float)(command_pos[0].y + 30));
-			comment->Draw((float)(command_pos[0].x + 300 + (name_num * STRING_SIZE_W) + 250), (float)(command_pos[0].y + 30), "けいけんちをかくとく！");
+			Count_Draw_2D(count_graph, exp, (float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W) + 150), (float)(command_pos[0].y + 30));
+			comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W) + 250), (float)(command_pos[0].y + 30), "けいけんちをかくとく！");
+			break;
+		case 2:
+			if (m_ally[0].exp_goal < m_ally[0].exp)
+			{
+				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[0].name);
+				name_size = m_ally[0].name.size() / 2;
+				comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "はレベルがあがった！");
+			}
+			else if (m_ally[1].exp_goal < m_ally[1].exp)
+			{
+				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[1].name);
+				name_size = m_ally[1].name.size() / 2;
+				comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "はレベルがあがった！");
+			}
+			else if (m_ally[2].exp_goal < m_ally[2].exp)
+			{
+				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[2].name);
+				name_size = m_ally[2].name.size() / 2;
+				comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "はレベルがあがった！");
+			}
+			break;
 		}
 	}
 }

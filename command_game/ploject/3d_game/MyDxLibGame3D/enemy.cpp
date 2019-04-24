@@ -34,89 +34,50 @@ Enemy::~Enemy()
 void Enemy::Turn_Reset()
 {
 }
+
+void Attack_Hp_Max(Chara *chara, Battle battle)
+{
+	if (!chara->chara_move_flag2)
+	{
+		chara->second_behavior_flag[battle.attack] = true;
+		float hp = 0.0f;
+		for (int j = 0; j < 3; j++)
+		{
+			if (hp < battle.m_ally[j].hp)
+			{
+				hp = battle.m_ally[j].hp;
+				chara->who_command_flag[0] = false;
+				chara->who_command_flag[1] = false;
+				chara->who_command_flag[2] = false;
+				chara->who_command_flag[j] = true;
+			}
+		}
+	}
+}
+
 void Enemy::Battle_AI(Battle *battle)
 {
 	for (int i = 0; i < 4; i++)
 	{
 		if (battle->m_enemy[i].name_origin == "スライム")
 		{
-			battle->m_enemy[i].second_behavior_flag[battle->attack] = true;
-			int hp = 0;
-			for (int j = 0; j < 3; j++)
-			{
-				if (hp < battle->m_ally[j].hp)
-				{
-					hp = battle->m_ally[j].hp;
-					battle->m_enemy[i].who_command_flag[0] = false;
-					battle->m_enemy[i].who_command_flag[1] = false;
-					battle->m_enemy[i].who_command_flag[2] = false;
-					battle->m_enemy[i].who_command_flag[j] = true;
-				}
-			}
+			Attack_Hp_Max(&battle->m_enemy[i], *battle);
         }
         if (battle->m_enemy[i].name_origin == "スライムベス")
         {
-			battle->m_enemy[i].second_behavior_flag[battle->attack] = true;
-			int hp = 0;
-			for (int j = 0; j < 3; j++)
-			{
-				if (hp < battle->m_ally[j].hp)
-				{
-					hp = battle->m_ally[j].hp;
-					battle->m_enemy[i].who_command_flag[0] = false;
-					battle->m_enemy[i].who_command_flag[1] = false;
-					battle->m_enemy[i].who_command_flag[2] = false;
-					battle->m_enemy[i].who_command_flag[j] = true;
-				}
-			}
+			Attack_Hp_Max(&battle->m_enemy[i], *battle);
         }
         if (battle->m_enemy[i].name_origin == "メタルスライム")
         {
-			battle->m_enemy[i].second_behavior_flag[battle->attack] = true;
-			int hp = 0;
-			for (int j = 0; j < 3; j++)
-			{
-				if (hp < battle->m_ally[j].hp)
-				{
-					hp = battle->m_ally[j].hp;
-					battle->m_enemy[i].who_command_flag[0] = false;
-					battle->m_enemy[i].who_command_flag[1] = false;
-					battle->m_enemy[i].who_command_flag[2] = false;
-					battle->m_enemy[i].who_command_flag[j] = true;
-				}
-			}
+			Attack_Hp_Max(&battle->m_enemy[i], *battle);
 		}
         if (battle->m_enemy[i].name_origin == "ライムスライム")
         {
-			battle->m_enemy[i].second_behavior_flag[battle->attack] = true;
-			int hp = 0;
-			for (int j = 0; j < 3; j++)
-			{
-				if (hp < battle->m_ally[j].hp)
-				{
-					hp = battle->m_ally[j].hp;
-					battle->m_enemy[i].who_command_flag[0] = false;
-					battle->m_enemy[i].who_command_flag[1] = false;
-					battle->m_enemy[i].who_command_flag[2] = false;
-					battle->m_enemy[i].who_command_flag[j] = true;
-				}
-			}
+			Attack_Hp_Max(&battle->m_enemy[i], *battle);
         }
         if (battle->m_enemy[i].name_origin == "レモンスライム")
         {
-			battle->m_enemy[i].second_behavior_flag[battle->attack] = true;
-			int hp = 0;
-			for (int j = 0; j < 3; j++)
-			{
-				if (hp < battle->m_ally[j].hp)
-				{
-					hp = battle->m_ally[j].hp;
-					battle->m_enemy[i].who_command_flag[0] = false;
-					battle->m_enemy[i].who_command_flag[1] = false;
-					battle->m_enemy[i].who_command_flag[2] = false;
-					battle->m_enemy[i].who_command_flag[j] = true;
-				}
-			}
+			Attack_Hp_Max(&battle->m_enemy[i], *battle);
         }
      }
 }
@@ -128,7 +89,8 @@ void Enemy::Move(Map map, Player player)
 		on_flag = true;
 		for (int i = 0; i < ENEMY; i++)
 		{
-			if (Enemy_notice(player.c_ally[0].f_pos, enemy[i].f_pos))
+			printfDx("%f,%f,%f\n", enemy[i].f_pos.x, enemy[i].f_pos.y, enemy[i].f_pos.z);
+			/*if (Enemy_notice(player.c_ally[0].f_pos, enemy[i].f_pos))
 			{
 				notice_flag[i] = true;
 			}
@@ -164,7 +126,7 @@ void Enemy::Move(Map map, Player player)
 					}
 				}
 				move_count[i]++;
-			}
+			}*/
 		}
 	}
 	else

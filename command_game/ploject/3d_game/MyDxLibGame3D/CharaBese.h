@@ -32,6 +32,7 @@ public:
 	float ski;					//器用さ
 	float spd;					//素早さ
 	int exp;					//経験値量
+	int exp_goal;				//次の目標経験値
 	bool ally_or_enemy_flag;//味方か敵かのフラグ＜true→味方　false→敵＞
 	//最初のコマンドフラグ
 	bool first_command_flag;//最初のコマンドを打ったかどうかのフラグ

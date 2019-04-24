@@ -154,6 +154,9 @@
 #define MENU_WINDOW_SIZE_X_1 1000.0f
 #define MENU_WINDOW_SIZE_Y_1 400.0f
 
+//‰Šú–Ú•WŒoŒ±’l
+#define EXP_GOAL_1ST 5
+
 struct Vector3
 {
 	float x, y, z;
