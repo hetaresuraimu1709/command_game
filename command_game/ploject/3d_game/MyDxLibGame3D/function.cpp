@@ -623,6 +623,5 @@ void Set_HPber(float pos_x, float pos_y, float rate, int color)
 	DrawBox((int)(pos_x - 7), (int)(pos_y - 7), (int)(pos_x + 157), (int)(pos_y + 37), GetColor(100, 100, 100), true);
 	DrawBox((int)(pos_x - 5), (int)(pos_y - 5), (int)(pos_x + 155), (int)(pos_y + 35), GetColor(200, 200, 200), true);
 	DrawBox((int)(pos_x), (int)(pos_y), (int)(pos_x + 150), (int)(pos_y + 30), GetColor(100, 0, 0), true);
-	DrawBox((int)(pos_x), (int)(pos_y), (int)(pos_x + (150 * rate)), (int)(pos_y + 30), color + GetColor(100, 100, 100), true);
 	DrawBox((int)(pos_x), (int)(pos_y), (int)(pos_x + (150 * rate)), (int)(pos_y + 30), color, true);
 }

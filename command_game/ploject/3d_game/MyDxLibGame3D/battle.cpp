@@ -1364,8 +1364,34 @@ void Battle::Updata(int *scene, Player *player, Enemy *enemy, Camera *camera, Ma
 				{
 					Level_Up(&m_ally[2], 2);
 				}
+				else
+				{
+					rast_count = -1;
+				}
 				break;
 			case 3:
+				if (m_ally[1].exp_goal < m_ally[1].exp)
+				{
+					Level_Up(&m_ally[1], 1);
+				}
+				else if (m_ally[2].exp_goal < m_ally[2].exp)
+				{
+					Level_Up(&m_ally[2], 2);
+				}
+				else
+				{
+					rast_count = -1;
+				}
+				break;
+			case 4:
+				if (m_ally[2].exp_goal < m_ally[2].exp)
+				{
+					Level_Up(&m_ally[2], 2);
+				}
+				else
+				{
+					rast_count = -1;
+				}
 				break;
 			default:
 				//ƒLƒƒƒ‰‚ÌƒXƒe[ƒ^ƒXŒp³
@@ -1510,6 +1536,40 @@ void Battle::Draw(int *scene, Player *player, Enemy *enemy, Map *map, Camera *ca
 				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[2].name);
 				name_size = m_ally[2].name.size() / 2;
 				comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "‚ÍƒŒƒxƒ‹‚ª‚ ‚ª‚Á‚½I");
+			}
+			else
+			{
+				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), "‚d‚m‚s‚d‚q‚Å‚à‚Ç‚é");
+			}
+			break;
+		case 3:
+			if (m_ally[1].exp_goal < m_ally[1].exp)
+			{
+				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[1].name);
+				name_size = m_ally[1].name.size() / 2;
+				comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "‚ÍƒŒƒxƒ‹‚ª‚ ‚ª‚Á‚½I");
+			}
+			else if (m_ally[2].exp_goal < m_ally[2].exp)
+			{
+				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[2].name);
+				name_size = m_ally[2].name.size() / 2;
+				comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "‚ÍƒŒƒxƒ‹‚ª‚ ‚ª‚Á‚½I");
+			}
+			else
+			{
+				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), "‚d‚m‚s‚d‚q‚Å‚à‚Ç‚é");
+			}
+			break;
+		case 4:
+			if (m_ally[2].exp_goal < m_ally[2].exp)
+			{
+				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[2].name);
+				name_size = m_ally[2].name.size() / 2;
+				comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "‚ÍƒŒƒxƒ‹‚ª‚ ‚ª‚Á‚½I");
+			}
+			else
+			{
+				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), "‚d‚m‚s‚d‚q‚Å‚à‚Ç‚é");
 			}
 			break;
 		}
