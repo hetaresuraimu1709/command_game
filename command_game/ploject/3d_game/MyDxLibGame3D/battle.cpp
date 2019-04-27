@@ -1277,7 +1277,7 @@ void Level_Up(Chara *chara, int pattern)
 	default:
 		break;
 	}
-	if (chara->exp_goal < chara->exp)
+	while(chara->exp_goal < chara->exp)
 	{
 		chara->level++;
 		chara->max_hp += chara->max_hp / hp_up_rate;
@@ -1399,6 +1399,7 @@ void Battle::Updata(int *scene, Player *player, Enemy *enemy, Camera *camera, Ma
 				{
 					player->c_ally[i] = m_ally[i];
 				}
+				Init(camera, player);
 				//シーンをフィールドに戻す
 				*scene = s_field;
 				break;

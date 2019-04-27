@@ -12,7 +12,7 @@ Enemy::Enemy(Memory memory)
 	//エネミーのステータス代入           名前               アドレス先								  フィールド														戦闘                HP   MP    攻撃   防御  攻魔 回魔 きようさ すばやさ 経験値
 	enemy[suraimu] = Status_Get(       "スライム"		,"data/model/enemy/suraimu1/suraimu.pmx", Map_On_Pos(VectorGet(MAP_CHIP, MAP_CHIP), VectorGet(10, 15)), VectorGet(0, 0, 0), 20,    0,   10,     5,  10,   0,     50,     5, 3,false);
 	enemy[suraimubesu] = Status_Get(   "スライムベス"	,"data/model/enemy/suraimu2/suraimu.pmx", Map_On_Pos(VectorGet(MAP_CHIP, MAP_CHIP), VectorGet(11, 15)), VectorGet(0, 0, 0), 30,   10,   15,     5,  10,   0,     30,     4, 3,false);
-	enemy[metarusuraimu] = Status_Get( "メタルスライム"	,"data/model/enemy/suraimu4/suraimu.pmx", Map_On_Pos(VectorGet(MAP_CHIP, MAP_CHIP), VectorGet(12, 15)), VectorGet(0, 0, 0),  3, 2500,    3,  2500,  10,   0,     10,   700, 3,false);
+	enemy[metarusuraimu] = Status_Get( "メタルスライム"	,"data/model/enemy/suraimu4/suraimu.pmx", Map_On_Pos(VectorGet(MAP_CHIP, MAP_CHIP), VectorGet(12, 15)), VectorGet(0, 0, 0),  3, 2500,    3,  2500,  10,   0,     10,   700, 1000,false);
 	enemy[raimusuraimu] = Status_Get(  "ライムスライム"	,"data/model/enemy/suraimu3/suraimu.pmx", Map_On_Pos(VectorGet(MAP_CHIP, MAP_CHIP), VectorGet(13, 15)), VectorGet(0, 0, 0), 15,   10,    5,    20,   0,  20,     50,     3, 3,false);
 	enemy[remonsuraimu] = Status_Get(  "レモンスライム"	,"data/model/enemy/suraimu5/suraimu.pmx", Map_On_Pos(VectorGet(MAP_CHIP, MAP_CHIP), VectorGet(14, 15)), VectorGet(0, 0, 0), 20,    0,   10,     5,  10,   0,     50,     2, 3,false);
 	Inventory_Have_Get(enemy[suraimu].		skill, memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi], memory.I_skill[memory.sk_nasi]);
@@ -89,7 +89,7 @@ void Enemy::Move(Map map, Player player)
 		on_flag = true;
 		for (int i = 0; i < ENEMY; i++)
 		{
-			printfDx("%f,%f,%f\n", enemy[i].f_pos.x, enemy[i].f_pos.y, enemy[i].f_pos.z);
+			//printfDx("%f,%f,%f\n", enemy[i].f_pos.x, enemy[i].f_pos.y, enemy[i].f_pos.z);
 			/*if (Enemy_notice(player.c_ally[0].f_pos, enemy[i].f_pos))
 			{
 				notice_flag[i] = true;
