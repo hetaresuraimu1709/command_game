@@ -30,6 +30,12 @@
 *.exe
 *.out
 *.app
+
+*.exe
+*.cache
+*.dll
+*.log
+*.pdb
 <<<<<<< HEAD
 *.sdf
 *.sln
