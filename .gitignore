@@ -36,6 +36,17 @@
 *.dll
 *.log
 *.pdb
+*.sdf
+*.sln
+*.ilk
+*.db
+*.pdb
+*.suo
+*.ipch
+*.vcxproj
+*.filters
+*.user
+*.opendb
 <<<<<<< HEAD
 *.sdf
 *.sln
