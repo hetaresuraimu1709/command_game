@@ -30,6 +30,33 @@
 *.exe
 *.out
 *.app
+
+*.exe
+*.cache
+*.dll
+*.log
+*.pdb
+*.sdf
+*.sln
+*.ilk
+*.db
+*.pdb
+*.suo
+*.ipch
+*.vcxproj
+*.filters
+*.user
+*.opendb
+<<<<<<< HEAD
+*.sdf
+*.sln
+*.db
+*.ipch
+*.vcxproj
+*.filters
+*.efkproj
+*.efkmodel
+=======
 *.db
 *.sdf
 *.sln
@@ -41,3 +68,5 @@
 *.filters
 *.user
 *.opendb
+>>>>>>> master
+*.tlog
