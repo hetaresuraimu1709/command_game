@@ -49,7 +49,7 @@ Chara Battle::No_1_Speed_Get(Chara *speed0, Chara *speed1, Chara *speed2, Chara 
 		if (!chara_base[i].command_play_flag &&
 			!chara_base[i].die_flag)
 		{
-			if (chara_base[i].spd + chara_base[i].puls_spd > chara_hoge.spd)
+			if (chara_base[i].status[_spd_] + chara_base[i].puls_spd > chara_hoge.status[_spd_])
 			{
 				chara_hoge = chara_base[i];
 			}
@@ -486,10 +486,10 @@ void Battle::Command_Choice_Draw(int number, Comment_string *comment, Window *wi
 		for (int i = 0; i < 4; i++)
 		{
 			name_num = m_enemy[i].name.size() / 2;
-			if (m_enemy[i].hp > 0)
+			if (m_enemy[i].status[_hp_] > 0)
 			{
 				comment->Draw(command_pos[5].x + KEY_3RD_POS_X + 20, command_pos[5].y + KEY_3RD_POS_Y + (KEY_3RD_MOVE_Y * i) - 10, m_enemy[i].name);
-				Set_HPber((command_pos[5].x + KEY_3RD_POS_X + 15 + (name_num * 50)), (command_pos[5].y + KEY_3RD_POS_Y + (KEY_3RD_MOVE_Y * i)), m_enemy[i].hp / m_enemy[i].max_hp, GetColor(55, 255, 55));
+				Set_HPber((command_pos[5].x + KEY_3RD_POS_X + 15 + (name_num * 50)), (command_pos[5].y + KEY_3RD_POS_Y + (KEY_3RD_MOVE_Y * i)), (float)m_enemy[i].status[_hp_] / (float)m_enemy[i].status[_max_hp_], GetColor(55, 255, 55));
 				if (Cursor(key_pos[2].y, command_pos[5].y + KEY_3RD_POS_Y + (KEY_3RD_MOVE_Y * i)))
 				{
 					DrawBillboard3D(VGet(m_enemy[i].b_pos.x, m_enemy[i].b_pos.y + 10.0f, m_enemy[i].b_pos.z), 0.5f, 0.5f, 5.0f, (float)(-DX_PI / 2.0f), key_graph[now_frame[2]], TRUE);
@@ -560,15 +560,15 @@ void Battle::Damage_Calculation(Chara *chara_case, int damege_source, int damege
             {
 				if (!damege[i].damege_once_flag)
 				{
-					if (!probability((int)(5 + (float)(chara_case->ski * 0.1f))))
+					if (!probability((int)(5 + (float)(chara_case->status[_ski_] * 0.1f))))
 					{
 						if (physics_flag)
 						{
-							damege[i].damage = (int)(damege_source * 1.5f - ((chara_case->def + chara_case->puls_def) * 0.5f) + damege_bonus);
+							damege[i].damage = (int)(damege_source * 1.5f - ((chara_case->status[_def_] + chara_case->puls_def) * 0.5f) + damege_bonus);
 						}
 						else if (!physics_flag)
 						{
-							damege[i].damage = (int)(damege_source * 1.5f - (chara_case->mp * 0.5f) + damege_bonus);
+							damege[i].damage = (int)(damege_source * 1.5f - (chara_case->status[_mp_] * 0.5f) + damege_bonus);
 						}
 					}
 					else
@@ -585,10 +585,10 @@ void Battle::Damage_Calculation(Chara *chara_case, int damege_source, int damege
 							{
 								damege[i].damage /= 2;
 							}
-							m_enemy[j].hp -= damege[i].damage;
-                            if (m_enemy[j].hp <= 0)
+							m_enemy[j].status[_hp_] -= damege[i].damage;
+                            if (m_enemy[j].status[_hp_] <= 0)
                             {
-								m_enemy[j].hp = 0;
+								m_enemy[j].status[_hp_] = 0;
                                 m_enemy[j].die_flag = true;
                             }
                         }
@@ -606,15 +606,15 @@ void Battle::Damage_Calculation(Chara *chara_case, int damege_source, int damege
             {
                 if (!damege[i + 3].damege_once_flag)
                 {
-                    if (!probability((int)(5 + (float)(chara_case->ski * 0.1f))))
+                    if (!probability((int)(5 + (float)(chara_case->status[_ski_] * 0.1f))))
                     {
                         if (physics_flag)
                         {
-                            damege[i + 3].damage = (int)(damege_source * 1.5f - ((chara_case->def + chara_case->puls_def) * 0.5f) + damege_bonus);
+                            damege[i + 3].damage = (int)(damege_source * 1.5f - ((chara_case->status[_def_] + chara_case->puls_def) * 0.5f) + damege_bonus);
                         }
                         else if (!physics_flag)
                         {
-                            damege[i + 3].damage = (int)(damege_source * 1.5f - (chara_case->mp * 0.5f) + damege_bonus);
+                            damege[i + 3].damage = (int)(damege_source * 1.5f - (chara_case->status[_mp_] * 0.5f) + damege_bonus);
                         }
                     }
                     else
@@ -631,10 +631,10 @@ void Battle::Damage_Calculation(Chara *chara_case, int damege_source, int damege
 							{
 								damege[i].damage /= 2;
 							}
-                            m_ally[j].hp -= damege[i + 3].damage;
-                            if (m_ally[j].hp <= 0)
+                            m_ally[j].status[_hp_] -= damege[i + 3].damage;
+                            if (m_ally[j].status[_hp_] <= 0)
                             {
-								m_ally[j].hp = 0;
+								m_ally[j].status[_hp_] = 0;
                                 m_ally[j].die_flag = true;
                             }
                         }
@@ -761,7 +761,7 @@ void Battle::Command_Play_Draw(Comment_string *comment,Chara *chara0, Chara *cha
 			}
 			else
 			{
-				Damage_Calculation_Set(comment, &chara_case, command_x + (float)(name_num * STRING_SIZE_W), command_y, (int)chara_case.pow, 0, true);
+				Damage_Calculation_Set(comment, &chara_case, command_x + (float)(name_num * STRING_SIZE_W), command_y, (int)chara_case.status[_pow_], 0, true);
 			}
 		}
 		else if (chara_case.second_behavior_flag[guard])
@@ -801,7 +801,7 @@ void Battle::Command_Play_Draw(Comment_string *comment,Chara *chara0, Chara *cha
 				}
 			else
 			{
-				Damage_Calculation_Set(comment, &chara_case, command_x + (float)(name_num * STRING_SIZE_W), command_y, (int)chara_case.pow, 0, false);
+				Damage_Calculation_Set(comment, &chara_case, command_x + (float)(name_num * STRING_SIZE_W), command_y, (int)chara_case.status[_pow_], 0, false);
 			}
 		}
 		command_play_count++;
@@ -1231,6 +1231,8 @@ void Battle::Playing(Player *player, Enemy *enemy, Camera *camera)
 void Level_Up(Chara *chara, int pattern)
 {
 	int hp_up_rate, mp_up_rate, pow_up_rate, def_up_rate, m_pow_up_rate, m_res_up_rate, ski_up_rate, spd_up_rate;
+	int chara_level_stats_up_rock;
+	chara_level_stats_up_rock = chara->status[_level_];
 	//ÉXÉeÅ[É^ÉXÇÃè„Ç™ÇËï˚í≤êﬂ
 	switch (pattern)
 	{
@@ -1277,20 +1279,20 @@ void Level_Up(Chara *chara, int pattern)
 	default:
 		break;
 	}
-	while(chara->exp_goal < chara->exp)
+	while(chara->status[_exp_goal_] < chara->status[_exp_])
 	{
-		chara->level++;
-		chara->max_hp += chara->max_hp / hp_up_rate;
-		chara->hp = chara->max_hp;
-		chara->max_mp += chara->max_mp / mp_up_rate;
-		chara->mp = chara->max_mp;
-		chara->pow += chara->pow / pow_up_rate;
-		chara->def += chara->def / def_up_rate;
-		chara->m_pow += chara->m_pow / m_pow_up_rate;
-		chara->m_res += chara->m_res / m_res_up_rate;
-		chara->ski = chara->ski / ski_up_rate;
-		chara->spd = chara->spd / spd_up_rate;
-		chara->exp_goal = ((chara->exp_goal * 2) + (chara->exp_goal / 2) + (chara->exp_goal % 2));
+		chara->status[_level_]++;
+		chara->status[_max_hp_] += chara->status[_max_hp_] / hp_up_rate - chara_level_stats_up_rock;
+		chara->status[_hp_] = chara->status[_max_hp_];
+		chara->status[_max_mp_] += chara->status[_max_mp_] / mp_up_rate - chara_level_stats_up_rock;
+		chara->status[_mp_] = chara->status[_max_mp_];
+		chara->status[_pow_] += chara->status[_pow_] / pow_up_rate - chara_level_stats_up_rock;
+		chara->status[_def_] += chara->status[_def_] / def_up_rate - chara_level_stats_up_rock;
+		chara->status[_m_pow_] += chara->status[_m_pow_] / m_pow_up_rate - chara_level_stats_up_rock;
+		chara->status[_m_res_] += chara->status[_m_res_] / m_res_up_rate - chara_level_stats_up_rock;
+		chara->status[_ski_] = chara->status[_ski_] / ski_up_rate - chara_level_stats_up_rock;
+		chara->status[_spd_] = chara->status[_spd_] / spd_up_rate - chara_level_stats_up_rock;
+		chara->status[_exp_goal_] = ((chara->status[_exp_goal_] * 2) + (chara->status[_exp_goal_] / 2) + (chara->status[_exp_goal_] % 2));
 	}
 }
 //************************************************************************
@@ -1348,19 +1350,19 @@ void Battle::Updata(int *scene, Player *player, Enemy *enemy, Camera *camera, Ma
 			case 1:
 				for (int i = 0; i < 3; i++)
 				{
-					m_ally[i].exp += m_enemy[0].exp + m_enemy[1].exp + m_enemy[2].exp + m_enemy[3].exp;
+					m_ally[i].status[_exp_] += m_enemy[0].status[_exp_] + m_enemy[1].status[_exp_] + m_enemy[2].status[_exp_] + m_enemy[3].status[_exp_];
 				}
 				break;
 			case 2:
-				if (m_ally[0].exp_goal < m_ally[0].exp)
+				if (m_ally[0].status[_exp_goal_] < m_ally[0].status[_exp_])
 				{
 					Level_Up(&m_ally[0], 0);
 				}
-				else if(m_ally[1].exp_goal < m_ally[1].exp)
+				else if(m_ally[1].status[_exp_goal_] < m_ally[1].status[_exp_])
 				{
 					Level_Up(&m_ally[1], 1);
 				}
-				else if (m_ally[2].exp_goal < m_ally[2].exp)
+				else if (m_ally[2].status[_exp_goal_] < m_ally[2].status[_exp_])
 				{
 					Level_Up(&m_ally[2], 2);
 				}
@@ -1370,11 +1372,11 @@ void Battle::Updata(int *scene, Player *player, Enemy *enemy, Camera *camera, Ma
 				}
 				break;
 			case 3:
-				if (m_ally[1].exp_goal < m_ally[1].exp)
+				if (m_ally[1].status[_exp_goal_] < m_ally[1].status[_exp_])
 				{
 					Level_Up(&m_ally[1], 1);
 				}
-				else if (m_ally[2].exp_goal < m_ally[2].exp)
+				else if (m_ally[2].status[_exp_goal_] < m_ally[2].status[_exp_])
 				{
 					Level_Up(&m_ally[2], 2);
 				}
@@ -1384,7 +1386,7 @@ void Battle::Updata(int *scene, Player *player, Enemy *enemy, Camera *camera, Ma
 				}
 				break;
 			case 4:
-				if (m_ally[2].exp_goal < m_ally[2].exp)
+				if (m_ally[2].status[_exp_goal_] < m_ally[2].status[_exp_])
 				{
 					Level_Up(&m_ally[2], 2);
 				}
@@ -1448,40 +1450,40 @@ void Battle::Draw(int *scene, Player *player, Enemy *enemy, Map *map, Camera *ca
 			for (int i = 0; i < 3; i++)
 			{
 				Vector2 pos = VectorGet((float)(command_pos[1].x + 120 + (i * 290)), (float)(command_pos[1].y + 70));
-				Set_HPber(pos.x, pos.y, m_ally[i].exp / m_ally[i].exp_goal, GetColor(255, 55, 55));
-				Set_HPber(pos.x, pos.y + 140, m_ally[i].mp / m_ally[i].max_mp, GetColor(55, 55, 255));
-		        if (m_ally[i].hp >= m_ally[i].max_hp * 0.3)
+				Set_HPber(pos.x, pos.y, (float)m_ally[i].status[_exp_] / (float)m_ally[i].status[_exp_goal_], GetColor(255, 55, 55));
+				Set_HPber(pos.x, pos.y + 140, (float)m_ally[i].status[_mp_] / (float)m_ally[i].status[_max_mp_], GetColor(55, 55, 255));
+		        if (m_ally[i].status[_hp_] >= m_ally[i].status[_max_hp_] * 0.3)
 		        {
 		            comment->Draw((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 10),  m_ally[i].name);
 					comment->Draw((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 70),  "ÇkÇu");
 					comment->Draw((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 140), "ÇgÇo");
 					comment->Draw((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 210), "ÇlÇo");
-					Set_HPber(pos.x, pos.y + 70, m_ally[i].hp / m_ally[i].max_hp, GetColor(55, 255, 55));
-					Count_Draw_2D(count_graph, (int)m_ally[i].level, pos.x, pos.y, rate);
-					Count_Draw_2D(count_graph, (int)m_ally[i].hp, pos.x, pos.y + 70,  rate);
-		            Count_Draw_2D(count_graph, (int)m_ally[i].mp, pos.x, pos.y + 140, rate);
+					Set_HPber(pos.x, pos.y + 70, (float)m_ally[i].status[_hp_] / (float)m_ally[i].status[_max_hp_], GetColor(55, 255, 55));
+					Count_Draw_2D(count_graph, (int)m_ally[i].status[_level_], pos.x, pos.y, rate);
+					Count_Draw_2D(count_graph, (int)m_ally[i].status[_hp_], pos.x, pos.y + 70,  rate);
+		            Count_Draw_2D(count_graph, (int)m_ally[i].status[_mp_], pos.x, pos.y + 140, rate);
 		        }
-		        else if (m_ally[i].hp < m_ally[i].max_hp * 0.3)
+		        else if (m_ally[i].status[_hp_] < m_ally[i].status[_max_hp_] * 0.3)
 		        {
 		            comment->Draw_Orange((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 10),  m_ally[i].name);
 					comment->Draw_Orange((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 70),  "ÇkÇu");
 					comment->Draw_Orange((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 140), "ÇgÇo");
 					comment->Draw_Orange((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 210), "ÇlÇo");
-					Set_HPber(pos.x, pos.y + 70, m_ally[i].hp / m_ally[i].max_hp, GetColor(155, 155, 55));
-					Count_Draw_2D(count_graph_orange, (int)m_ally[i].level, pos.x, pos.y, rate);
-					Count_Draw_2D(count_graph_orange, (int)m_ally[i].hp, pos.x, pos.y + 70, rate);
-					Count_Draw_2D(count_graph_orange, (int)m_ally[i].mp, pos.x, pos.y + 140, rate);
+					Set_HPber(pos.x, pos.y + 70, (float)m_ally[i].status[_hp_] / (float)m_ally[i].status[_max_hp_], GetColor(155, 155, 55));
+					Count_Draw_2D(count_graph_orange, (int)m_ally[i].status[_level_], pos.x, pos.y, rate);
+					Count_Draw_2D(count_graph_orange, (int)m_ally[i].status[_hp_], pos.x, pos.y + 70, rate);
+					Count_Draw_2D(count_graph_orange, (int)m_ally[i].status[_mp_], pos.x, pos.y + 140, rate);
 		        }
-		        else if (m_ally[i].hp <= 0)
+		        else if (m_ally[i].status[_hp_] <= 0)
 		        {
 		            comment->Draw_Red((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 10),  m_ally[i].name);
 					comment->Draw_Red((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 70),  "ÇkÇu");
 					comment->Draw_Red((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 140), "ÇgÇo");
 					comment->Draw_Red((float)(command_pos[1].x + 10 + (i * 290)), (float)(command_pos[1].y + 210), "ÇlÇo");
-					Set_HPber(pos.x, pos.y + 70, m_ally[i].hp / m_ally[i].max_hp, GetColor(255, 55, 55));
-					Count_Draw_2D(count_graph_red, (int)m_ally[i].level, pos.x, pos.y, rate);
-					Count_Draw_2D(count_graph_red, (int)m_ally[i].hp, pos.x, pos.y + 70, rate);
-					Count_Draw_2D(count_graph_red, (int)m_ally[i].mp, pos.x, pos.y + 140, rate);
+					Set_HPber(pos.x, pos.y + 70, (float)m_ally[i].status[_hp_] / (float)m_ally[i].status[_max_hp_], GetColor(255, 55, 55));
+					Count_Draw_2D(count_graph_red, (int)m_ally[i].status[_level_], pos.x, pos.y, rate);
+					Count_Draw_2D(count_graph_red, (int)m_ally[i].status[_hp_], pos.x, pos.y + 70, rate);
+					Count_Draw_2D(count_graph_red, (int)m_ally[i].status[_mp_], pos.x, pos.y + 140, rate);
 		        }
 			}
 		    //ÉLÉÉÉâÇÃÉRÉ}ÉìÉh
@@ -1521,25 +1523,25 @@ void Battle::Draw(int *scene, Player *player, Enemy *enemy, Map *map, Camera *ca
 			comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "ÇΩÇøÇÕ");
 			for (int i = 0; i < 4; i++)
 			{
-				exp += m_enemy[i].exp;
+				exp += m_enemy[i].status[_exp_];
 			}
 			Count_Draw_2D(count_graph, exp, (float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W) + 150), (float)(command_pos[0].y + 30));
 			comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W) + 250), (float)(command_pos[0].y + 30), "ÇØÇ¢ÇØÇÒÇøÇÇ©Ç≠Ç∆Ç≠ÅI");
 			break;
 		case 2:
-			if (m_ally[0].exp_goal < m_ally[0].exp)
+			if (m_ally[0].status[_exp_goal_] < m_ally[0].status[_exp_])
 			{
 				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[0].name);
 				name_size = m_ally[0].name.size() / 2;
 				comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "ÇÕÉåÉxÉãÇ™Ç†Ç™Ç¡ÇΩÅI");
 			}
-			else if (m_ally[1].exp_goal < m_ally[1].exp)
+			else if (m_ally[1].status[_exp_goal_] < m_ally[1].status[_exp_])
 			{
 				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[1].name);
 				name_size = m_ally[1].name.size() / 2;
 				comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "ÇÕÉåÉxÉãÇ™Ç†Ç™Ç¡ÇΩÅI");
 			}
-			else if (m_ally[2].exp_goal < m_ally[2].exp)
+			else if (m_ally[2].status[_exp_goal_] < m_ally[2].status[_exp_])
 			{
 				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[2].name);
 				name_size = m_ally[2].name.size() / 2;
@@ -1551,13 +1553,13 @@ void Battle::Draw(int *scene, Player *player, Enemy *enemy, Map *map, Camera *ca
 			}
 			break;
 		case 3:
-			if (m_ally[1].exp_goal < m_ally[1].exp)
+			if (m_ally[1].status[_exp_goal_] < m_ally[1].status[_exp_])
 			{
 				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[1].name);
 				name_size = m_ally[1].name.size() / 2;
 				comment->Draw((float)(command_pos[0].x + 300 + (name_size * STRING_SIZE_W)), (float)(command_pos[0].y + 30), "ÇÕÉåÉxÉãÇ™Ç†Ç™Ç¡ÇΩÅI");
 			}
-			else if (m_ally[2].exp_goal < m_ally[2].exp)
+			else if (m_ally[2].status[_exp_goal_] < m_ally[2].status[_exp_])
 			{
 				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[2].name);
 				name_size = m_ally[2].name.size() / 2;
@@ -1569,7 +1571,7 @@ void Battle::Draw(int *scene, Player *player, Enemy *enemy, Map *map, Camera *ca
 			}
 			break;
 		case 4:
-			if (m_ally[2].exp_goal < m_ally[2].exp)
+			if (m_ally[2].status[_exp_goal_] < m_ally[2].status[_exp_])
 			{
 				comment->Draw((float)(command_pos[0].x + 300), (float)(command_pos[0].y + 30), m_ally[2].name);
 				name_size = m_ally[2].name.size() / 2;

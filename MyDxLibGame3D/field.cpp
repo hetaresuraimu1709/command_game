@@ -61,6 +61,7 @@ void Field::Updata(Player *player, Music music)
 void Field::Draw(Player * player, Comment_string * comment, Window * window)
 {
 	float rate = 0.8f;
+	int space = 350;
 	window->Command_Draw(menu_pos[0].x, menu_pos[0].y, MENU_WINDOW_SIZE_X_0, MENU_WINDOW_SIZE_Y_0);
 	window->Command_Draw(menu_pos[1].x, menu_pos[1].y, MENU_WINDOW_SIZE_X_1, MENU_WINDOW_SIZE_Y_1);
 	if (player->menu_open_flag)
@@ -71,41 +72,41 @@ void Field::Draw(Player * player, Comment_string * comment, Window * window)
 		}
 		for (int i = 0; i < 3; i++)
 		{
-			Vector2 pos = VectorGet((float)(menu_pos[1].x + 120 + (i * 290)), (float)(menu_pos[1].y + 70));
-			Set_HPber(pos.x, pos.y, (float)player->c_ally[i].exp / (float)player->c_ally[i].exp_goal, GetColor(255, 55, 55));
-			Set_HPber(pos.x, pos.y + 140, player->c_ally[i].mp / player->c_ally[i].max_mp, GetColor(55, 55, 255));
-			if (player->c_ally[i].hp >= player->c_ally[i].max_hp * 0.3)
+			Vector2 pos = VectorGet((float)(menu_pos[1].x + 120 + (i * space)), (float)(menu_pos[1].y + 70));
+			Set_HPber(pos.x, pos.y, (float)player->c_ally[i].status[_exp_] / (float)player->c_ally[i].status[_exp_goal_], GetColor(255, 55, 55));
+			Set_HPber(pos.x, pos.y + 140, (float)player->c_ally[i].status[_mp_] / (float)player->c_ally[i].status[_max_mp_], GetColor(55, 55, 255));
+			if (player->c_ally[i].status[_hp_] >= player->c_ally[i].status[_max_hp_] * 0.3)
 			{
-				comment->Draw((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 10), player->c_ally[i].name);
-				comment->Draw((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 70), "‚k‚u");
-				comment->Draw((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 140), "‚g‚o");
-				comment->Draw((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 210), "‚l‚o");
-				Set_HPber(pos.x, pos.y + 70, player->c_ally[i].hp / player->c_ally[i].max_hp, GetColor(55, 255, 55));
-				Count_Draw_2D(count_graph, (int)player->c_ally[i].level, pos.x, pos.y, rate);
-				Count_Draw_2D(count_graph, (int)player->c_ally[i].hp, pos.x, pos.y + 70, rate);
-				Count_Draw_2D(count_graph, (int)player->c_ally[i].mp, pos.x, pos.y + 140, rate);
+				comment->Draw((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 10), player->c_ally[i].name);
+				comment->Draw((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 70), "‚k‚u");
+				comment->Draw((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 140), "‚g‚o");
+				comment->Draw((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 210), "‚l‚o");
+				Set_HPber(pos.x, pos.y + 70, (float)player->c_ally[i].status[_hp_] / (float)player->c_ally[i].status[_max_hp_], GetColor(55, 255, 55));
+				Count_Draw_2D(count_graph, (int)player->c_ally[i].status[_level_], pos.x, pos.y, rate);
+				Count_Draw_2D(count_graph, (int)player->c_ally[i].status[_hp_], pos.x, pos.y + 70, rate);
+				Count_Draw_2D(count_graph, (int)player->c_ally[i].status[_mp_], pos.x, pos.y + 140, rate);
 			}
-			else if (player->c_ally[i].hp < player->c_ally[i].max_hp * 0.3)
+			else if (player->c_ally[i].status[_hp_] < player->c_ally[i].status[_max_hp_] * 0.3)
 			{
-				comment->Draw_Orange((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 10), player->c_ally[i].name);
-				comment->Draw_Orange((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 70), "‚k‚u");
-				comment->Draw_Orange((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 140), "‚g‚o");
-				comment->Draw_Orange((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 210), "‚l‚o");
-				Set_HPber(pos.x, pos.y + 70, player->c_ally[i].hp / player->c_ally[i].max_hp, GetColor(155, 155, 55));
-				Count_Draw_2D(count_graph_orange, (int)player->c_ally[i].level, pos.x, pos.y, rate);
-				Count_Draw_2D(count_graph_orange, (int)player->c_ally[i].hp, pos.x, pos.y + 70, rate);
-				Count_Draw_2D(count_graph_orange, (int)player->c_ally[i].mp, pos.x, pos.y + 140, rate);
+				comment->Draw_Orange((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 10), player->c_ally[i].name);
+				comment->Draw_Orange((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 70), "‚k‚u");
+				comment->Draw_Orange((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 140), "‚g‚o");
+				comment->Draw_Orange((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 210), "‚l‚o");
+				Set_HPber(pos.x, pos.y + 70, (float)player->c_ally[i].status[_hp_] / (float)player->c_ally[i].status[_max_hp_], GetColor(155, 155, 55));
+				Count_Draw_2D(count_graph_orange, (int)player->c_ally[i].status[_level_], pos.x, pos.y, rate);
+				Count_Draw_2D(count_graph_orange, (int)player->c_ally[i].status[_hp_], pos.x, pos.y + 70, rate);
+				Count_Draw_2D(count_graph_orange, (int)player->c_ally[i].status[_mp_], pos.x, pos.y + 140, rate);
 			}
-			else if (player->c_ally[i].hp <= 0)
+			else if (player->c_ally[i].status[_hp_] <= 0)
 			{
-				comment->Draw_Red((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 10), player->c_ally[i].name);
-				comment->Draw_Red((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 70), "‚k‚u");
-				comment->Draw_Red((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 140), "‚g‚o");
-				comment->Draw_Red((float)(menu_pos[1].x + 10 + (i * 290)), (float)(menu_pos[1].y + 210), "‚l‚o");
-				Set_HPber(pos.x, pos.y + 70, player->c_ally[i].hp / player->c_ally[i].max_hp, GetColor(255, 55, 55));
-				Count_Draw_2D(count_graph_red, (int)player->c_ally[i].level, pos.x, pos.y, rate);
-				Count_Draw_2D(count_graph_red, (int)player->c_ally[i].hp, pos.x, pos.y + 70, rate);
-				Count_Draw_2D(count_graph_red, (int)player->c_ally[i].mp, pos.x, pos.y + 140, rate);
+				comment->Draw_Red((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 10), player->c_ally[i].name);
+				comment->Draw_Red((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 70), "‚k‚u");
+				comment->Draw_Red((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 140), "‚g‚o");
+				comment->Draw_Red((float)(menu_pos[1].x + 10 + (i * space)), (float)(menu_pos[1].y + 210), "‚l‚o");
+				Set_HPber(pos.x, pos.y + 70, (float)player->c_ally[i].status[_hp_] / (float)player->c_ally[i].status[_max_hp_], GetColor(255, 55, 55));
+				Count_Draw_2D(count_graph_red, (int)player->c_ally[i].status[_level_], pos.x, pos.y, rate);
+				Count_Draw_2D(count_graph_red, (int)player->c_ally[i].status[_hp_], pos.x, pos.y + 70, rate);
+				Count_Draw_2D(count_graph_red, (int)player->c_ally[i].status[_mp_], pos.x, pos.y + 140, rate);
 			}
 		}
 	}

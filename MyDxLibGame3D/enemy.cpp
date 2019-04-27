@@ -40,12 +40,12 @@ void Attack_Hp_Max(Chara *chara, Battle battle)
 	if (!chara->chara_move_flag2)
 	{
 		chara->second_behavior_flag[battle.attack] = true;
-		float hp = 0.0f;
+		int hp = 0;
 		for (int j = 0; j < 3; j++)
 		{
-			if (hp < battle.m_ally[j].hp)
+			if (hp < battle.m_ally[j].status[_hp_])
 			{
-				hp = battle.m_ally[j].hp;
+				hp = battle.m_ally[j].status[_hp_];
 				chara->who_command_flag[0] = false;
 				chara->who_command_flag[1] = false;
 				chara->who_command_flag[2] = false;
@@ -151,7 +151,7 @@ void Enemy::Battle_Draw(Battle battle, Effect *effect)
 {
     for (int i = 0; i < ENEMY; i++)
     {
-		if (battle.m_enemy[i].hp > 0)
+		if (battle.m_enemy[i].status[_hp_] > 0)
 		{
 			MV1DrawModel(battle.m_enemy[i].modelHandle);
 			MV1SetPosition(battle.m_enemy[i].modelHandle, VGet(battle.m_enemy[i].b_pos.x, battle.m_enemy[i].b_pos.y, battle.m_enemy[i].b_pos.z));
