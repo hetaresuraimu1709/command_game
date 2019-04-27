@@ -69,3 +69,4 @@
 *.user
 *.opendb
 >>>>>>> master
+*.tlog
