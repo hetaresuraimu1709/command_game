@@ -20,19 +20,7 @@ public:
     std::string name;			//名前
 	std::string name_origin;	//名前
 	int modelHandle;			//画像
-    int level;					//レベル
-	float max_hp;				//体力の最大値
-	float hp;					//体力
-	float max_mp;				//魔力の最大値
-	float mp;					//魔力
-	float pow;					//攻撃力
-	float def;					//防御力
-	float m_pow;				//攻撃魔力
-	float m_res;				//回復魔力
-	float ski;					//器用さ
-	float spd;					//素早さ
-	int exp;					//経験値量
-	int exp_goal;				//次の目標経験値
+	int status[13];
 	bool ally_or_enemy_flag;//味方か敵かのフラグ＜true→味方　false→敵＞
 	//最初のコマンドフラグ
 	bool first_command_flag;//最初のコマンドを打ったかどうかのフラグ
@@ -70,5 +58,6 @@ public:
 
 	int damage_move_y;
 };
+
 
 #endif // _CHARABESE_H_

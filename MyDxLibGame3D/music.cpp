@@ -15,15 +15,15 @@ BGM Get_BGM(int intro, int loop,bool intro_flag, bool intro_end_flag,bool loop_f
 
 Music::Music()
 {
-	cursor_enter_se	 = LoadSoundMem("data/sound/SE/cursor_enter.mp3");
-	cursor_move_se	 = LoadSoundMem("data/sound/SE/cursor_move.mp3");
-	cursor_cancel_se = LoadSoundMem("data/sound/SE/cursor_cancel.mp3");
-	title_enter_se = LoadSoundMem("data/sound/SE/enter.mp3");
-	title_cancel_se = LoadSoundMem("data/sound/SE/cancel.mp3");
-	field_theme_bgm  = Get_BGM(0,														LoadSoundMem("data/sound/BGM/field.mp3"),				true,  true,  false);
-	title_theme_bgm  = Get_BGM(LoadSoundMem("data/sound/BGM/title_theme/intro.mp3"),	LoadSoundMem("data/sound/BGM/title_theme/loop.mp3"),	false, false, false);
-	enemy_battle_bgm = Get_BGM(LoadSoundMem("data/sound/BGM/enemy_battle/intro.mp3"),	LoadSoundMem("data/sound/BGM/enemy_battle/loop.mp3"),	false, false, false);
-	boss_battle_bgm  = Get_BGM(LoadSoundMem("data/sound/BGM/boss_battle/intro.mp3"),	LoadSoundMem("data/sound/BGM/boss_battle/loop.mp3"),	false, false, false);
+	cursor_enter_se	 = LoadSoundMem("data/sound/SE/cursor_enter.status[_mp_]3");
+	cursor_move_se	 = LoadSoundMem("data/sound/SE/cursor_move.status[_mp_]3");
+	cursor_cancel_se = LoadSoundMem("data/sound/SE/cursor_cancel.status[_mp_]3");
+	title_enter_se = LoadSoundMem("data/sound/SE/enter.status[_mp_]3");
+	title_cancel_se = LoadSoundMem("data/sound/SE/cancel.status[_mp_]3");
+	field_theme_bgm  = Get_BGM(0,														LoadSoundMem("data/sound/BGM/field.status[_mp_]3"),				true,  true,  false);
+	title_theme_bgm  = Get_BGM(LoadSoundMem("data/sound/BGM/title_theme/intro.status[_mp_]3"),	LoadSoundMem("data/sound/BGM/title_theme/loop.status[_mp_]3"),	false, false, false);
+	enemy_battle_bgm = Get_BGM(LoadSoundMem("data/sound/BGM/enemy_battle/intro.status[_mp_]3"),	LoadSoundMem("data/sound/BGM/enemy_battle/loop.status[_mp_]3"),	false, false, false);
+	boss_battle_bgm  = Get_BGM(LoadSoundMem("data/sound/BGM/boss_battle/intro.status[_mp_]3"),	LoadSoundMem("data/sound/BGM/boss_battle/loop.status[_mp_]3"),	false, false, false);
 	volume_max_bgm = 155;
 	volume_max_se = 155;
 }

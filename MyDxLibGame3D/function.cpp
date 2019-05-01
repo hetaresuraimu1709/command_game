@@ -1,4 +1,5 @@
-#include"Header.h"
+#include "Save.h"
+#include "Header.h"
 
 //向き変え
 void Turn_Around(float &now_dir, float aim_dir, float speed_dir, bool &turn_flag)
@@ -80,30 +81,101 @@ void Turn_Around(float &now_dir, float aim_dir, float speed_dir, bool &turn_flag
 	}
 }
 
+//ステータスチェック
+void Status_Check(int *data1, int *data2, int *data3)
+{
+	for (int i = 0; i < 13; i++)
+	{
+		switch (i)
+		{
+		case 0:
+			printfDx("Lv. ");
+			break;
+		case 1:
+			printfDx("MHP ");
+			break;
+		case 2:
+			printfDx("HP  ");
+			break;
+		case 3:
+			printfDx("MMP ");
+			break;
+		case 4:
+			printfDx("MP  ");
+			break;
+		case 5:
+			printfDx("POW ");
+			break;
+		case 6:
+			printfDx("DEF ");
+			break;
+		case 7:
+			printfDx("MPW ");
+			break;
+		case 8:
+			printfDx("MRS ");
+			break;
+		case 9:
+			printfDx("SKI ");
+			break;
+		case 10:
+			printfDx("SPD ");
+			break;
+		case 11:
+			printfDx("EXP ");
+			break;
+		case 12:
+			printfDx("EXG ");
+			break;
+		}
+		printfDx("%d  %d  %d\n", data1[i], data2[i], data3[i]);
+	}
+}
+
+void Chara_Status_Load(Chara *chara ,int num)
+{
+	LOAD_FILE->FileLoader("data/save/chara_stats_1.csv");
+
+	for (int j = 0; j < num; j++)
+	{
+		for (int i = 0; i < 13; i++)
+		{
+			chara[j].status[i] = LOAD_FILE->FileGeter(j, i);
+		}
+	}
+}
+void Chara_Status_Save(Chara *chara, int num)
+{
+	for (int j = 0; j < num; j++)
+	{
+		LOAD_FILE->Filewritier("data/save/chara_stats_1.csv", 13, chara[j].status);
+	}
+}
+
 //ステータス代入
-Chara Status_Get(std::string chara_name, char *file_name, Vector3 f_pos, Vector3 b_pos,float hp, float mp, float pow, float def, float m_pow, float m_res, float ski, float spd, int exp,bool ally_or_enemy_flag)
+Chara Status_Get(std::string chara_name, char *file_name, Vector3 f_pos, Vector3 b_pos,int _hp, int _mp, int _pow, int _def, int _m_pow, int _m_res, int _ski, int _spd, int _exp,bool ally_or_enemy_flag)
 {
 	Chara name;
-	name.modelHandle		= MV1LoadModel(file_name);
-    name.name				= chara_name;
-	name.name_origin		= chara_name;
-    name.level              = 1;
-	name.f_pos				= f_pos;
-	name.b_pos				= b_pos;
-	name.first_pos			= b_pos;
-	name.max_hp				= hp;
-	name.hp					= hp;
-	name.max_mp				= mp;
-	name.mp					= mp;
-	name.pow				= pow;
-	name.def				= def;
-	name.m_pow				= m_pow;
-	name.m_res				= m_res;
-	name.ski				= ski;
-	name.spd				= spd;
-	name.exp				= exp;
-	name.exp_goal			= EXP_GOAL_1ST;
-	name.ally_or_enemy_flag = ally_or_enemy_flag;
+	name.modelHandle			= MV1LoadModel(file_name);
+    name.name					= chara_name;
+	name.name_origin			= chara_name;
+    name.status[_level_]		= 1;
+	name.f_pos					= f_pos;
+	name.b_pos					= b_pos;
+	name.first_pos				= b_pos;
+	name.status[_max_hp_]		= _hp;
+	name.status[_hp_]			= _hp;
+	name.status[_max_mp_]		= _mp;
+	name.status[_mp_]			= _mp;
+	name.status[_pow_]			= _pow;
+	name.status[_def_]			= _def;
+	name.status[_m_pow_]		= _m_pow;
+	name.status[_m_res_]		= _m_res;
+	name.status[_ski_]			= _ski;
+	name.status[_spd_]			= _spd;
+	name.status[_exp_]			= _exp;
+	name.status[_exp_goal_]		= EXP_GOAL_1ST;
+	name.ally_or_enemy_flag		= ally_or_enemy_flag;
 	//name.ally_or_enemy_flag = false;
 	name.first_command_flag = false;
 	for (int i = 0; i < KEY_1ST_MAX_COMMAND; i++)

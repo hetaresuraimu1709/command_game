@@ -76,63 +76,63 @@ void Memory::UseSpell(Battle *battle, Chara *chara)
 			{
 				if (inv_case.name == "フィレン")
 				{
-					chara->mp -= 3;
+					chara->status[_mp_] -= 3;
 				}
 				if (inv_case.name == "フィレイヤ")
 				{
-					chara->mp -= 5;
+					chara->status[_mp_] -= 5;
 				}
 				if (inv_case.name == "フィレムーア")
 				{
-					chara->mp -= 10;
+					chara->status[_mp_] -= 10;
 				}
 				if (inv_case.name == "ロフス")
 				{
-					chara->mp -= 3;
+					chara->status[_mp_] -= 3;
 				}
 				if (inv_case.name == "ロフスィン")
 				{
-					chara->mp -= 5;
+					chara->status[_mp_] -= 5;
 				}
 				if (inv_case.name == "ロブスーン")
 				{
-					chara->mp -= 10;
+					chara->status[_mp_] -= 10;
 				}
 				if (inv_case.name == "アーレ")
 				{
-					chara->mp -= 3;
+					chara->status[_mp_] -= 3;
 				}
 				if (inv_case.name == "エアーレ")
 				{
-					chara->mp -= 5;
+					chara->status[_mp_] -= 5;
 				}
 				if (inv_case.name == "エアリガレ")
 				{
-					chara->mp -= 10;
+					chara->status[_mp_] -= 10;
 				}
 				if (inv_case.name == "フォーズ")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 				if (inv_case.name == "フォール")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 				if (inv_case.name == "ガーヅ")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 				if (inv_case.name == "ガール")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 				if (inv_case.name == "スピーズ")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 				if (inv_case.name == "スピール")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 			}
 		}
@@ -150,63 +150,63 @@ void Memory::UseSkill(Battle *battle, Chara *chara)
 			{
 				if (inv_case.name == "なぎはらい")
 				{
-					chara->mp -= 3;
+					chara->status[_mp_] -= 3;
 				}
 				if (inv_case.name == "いっせん")
 				{
-					chara->mp -= 5;
+					chara->status[_mp_] -= 5;
 				}
 				if (inv_case.name == "めつぶし")
 				{
-					chara->mp -= 10;
+					chara->status[_mp_] -= 10;
 				}
 				if (inv_case.name == "くちふさぎ")
 				{
-					chara->mp -= 3;
+					chara->status[_mp_] -= 3;
 				}
 				if (inv_case.name == "ちょうはつ")
 				{
-					chara->mp -= 5;
+					chara->status[_mp_] -= 5;
 				}
 				if (inv_case.name == "たいあたり")
 				{
-					chara->mp -= 10;
+					chara->status[_mp_] -= 10;
 				}
 				if (inv_case.name == "みねうち")
 				{
-					chara->mp -= 3;
+					chara->status[_mp_] -= 3;
 				}
 				if (inv_case.name == "おたけび")
 				{
-					chara->mp -= 5;
+					chara->status[_mp_] -= 5;
 				}
 				if (inv_case.name == "てあて")
 				{
-					chara->mp -= 10;
+					chara->status[_mp_] -= 10;
 				}
 				if (inv_case.name == "はっする")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 				if (inv_case.name == "ひろいぐい")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 				if (inv_case.name == "そせいじゅつ")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 				if (inv_case.name == "あらりょうじ")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 				if (inv_case.name == "おやすみ")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 				if (inv_case.name == "まんじ")
 				{
-					chara->mp -= 2;
+					chara->status[_mp_] -= 2;
 				}
 			}
 		}

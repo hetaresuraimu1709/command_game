@@ -26,7 +26,10 @@
 
 //function.cppで作った関数のプロトタイプ宣言
 void Turn_Around(float &now_dir, float max_dir, float speed_dir, bool &turn_flag);
-Chara Status_Get(std::string chara_name, char *file_name, Vector3 f_pos, Vector3 b_pos, float hp, float mp, float pow, float def, float m_pow, float m_res, float ski, float spd, int exp, bool ally_or_enemy_flag);
+void Status_Check(int *data1, int *data2, int *data3);
+void Chara_Status_Load(Chara *chara, int num);
+void Chara_Status_Save(Chara *chara, int num);
+Chara Status_Get(std::string chara_name, char *file_name, Vector3 f_pos, Vector3 b_pos, int _hp, int _mp, int _pow, int _def, int _m_pow, int _m_res, int _ski, int _spd, int _exp, bool ally_or_enemy_flag);
 Inventory Inventory_Have_Get(Inventory Inve[6], Inventory one, Inventory two, Inventory three, Inventory four, Inventory five, Inventory six);
 Inventory Inventory_Get(int number, bool use_flag, int damage_bonus, int force, std::string name);
 bool Enemy_notice(Vector3 pos1, Vector3 pos2);

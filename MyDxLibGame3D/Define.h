@@ -188,4 +188,21 @@ enum scene
 	s_end,//エンディング
 };
 
+enum stauts_
+{
+	_level_,		//レベル
+	_max_hp_,		//体力の最大値
+	_hp_,			//体力
+	_max_mp_,		//魔力の最大値
+	_mp_,			//魔力
+	_pow_,		//攻撃力
+	_def_,		//防御力
+	_m_pow_,		//攻撃魔力
+	_m_res_,		//回復魔力
+	_ski_,		//器用さ
+	_spd_,		//素早さ
+	_exp_,		//経験値量
+	_exp_goal_,	//次の目標経験値
+};
+
 #endif

@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 #include "Header.h"
 #include "Load.h"
+#include "Save.h"
 
 //-----------------------------------------------------------------------------
 // @brief  メイン関数.
@@ -13,7 +14,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	// 画面モードのセット
 	ChangeWindowMode(TRUE);
 	SetGraphMode(1920, 1080, 16);
-	//SetWindowSizeExtendRate(0.5, 0.5);
+	//SetWindowSizeExtendRate(0.7, 0.7);
 
 	//描画先を裏画面に変更する。
 	SetDrawScreen(DX_SCREEN_BACK);
@@ -75,6 +76,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	c_field->Init();
 	//Npc *c_npc = new Npc();
 	//c_npc->Init();
+	Chara_Status_Load(c_player->c_ally, 3);
 	int scene = s_title;
 	bool game_end_flag = false;
 	load.end_flag = true;
@@ -99,6 +101,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			c_title->Move(&scene, c_music, &game_end_flag);
 			break;
 		case s_field:
+			Status_Check(c_player->c_ally[0].status, c_player->c_ally[1].status, c_player->c_ally[2].status);
 			//c_npc->Updata();
 			if (!c_player->menu_open_flag)
 			{
@@ -108,6 +111,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 				c_player->EnemyHit(&scene, c_enemy, c_battle, c_camera);
 				c_camera->Move(*c_player, c_map);
 				c_player->VectorReset();
+			}
+			if (CheckHitKey(KEY_INPUT_C))
+			{
+				Chara_Status_Save(c_player->c_ally, 3);
 			}
 			c_field->Updata(c_player, *c_music);
 			break;
