@@ -74,7 +74,7 @@ bool LoadFile::Filewritier(const char * _filename, const int data)
 	return true;
 }
 
-bool LoadFile::Filewritier(const char * _filename, const int size, const int * data)
+bool LoadFile::Filewritier(const char * _filename, const int size, const int *data)
 {
 	//ƒtƒ@ƒCƒ‹‚É’Ç‰Á‚µ‚Ä‘‚«‚İ
 	std::ofstream fout(_filename);
@@ -82,7 +82,7 @@ bool LoadFile::Filewritier(const char * _filename, const int size, const int * d
 
 	for (int i = 0; i < size; i++)
 	{
-		fout << data << "," << std::flush;
+		fout << data[i] << "," << std::flush;
 	}
 	return true;
 }
