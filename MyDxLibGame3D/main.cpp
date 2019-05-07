@@ -76,7 +76,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	c_field->Init();
 	//Npc *c_npc = new Npc();
 	//c_npc->Init();
-	//Chara_Status_Load(c_player->c_ally, 3);
+	Chara_Status_Load(c_player->c_ally, 3);
 	int scene = s_title;
 	bool game_end_flag = false;
 	load.end_flag = true;

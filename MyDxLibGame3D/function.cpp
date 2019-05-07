@@ -133,7 +133,7 @@ void Status_Check(int *data1, int *data2, int *data3)
 
 void Chara_Status_Load(Chara *chara ,int num)
 {
-	LOAD_FILE->FileLoader("data/save/chara_stats.csv");
+	LOAD_FILE->FileLoader("data/save/chara_stats.csv", 3);
 
 	for (int j = 0; j < num; j++)
 	{
