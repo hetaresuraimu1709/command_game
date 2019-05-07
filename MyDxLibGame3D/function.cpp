@@ -147,7 +147,7 @@ void Chara_Status_Save(Chara *chara, int num)
 {
 	for (int j = 0; j < num; j++)
 	{
-		//LOAD_FILE->Filewritier("data/save/chara_stats_1.csv", 13, chara[j].status);
+		LOAD_FILE->Filewritier("data/save/chara_stats_1.csv", 13, chara[j].status);
 	}
 }
 
@@ -579,6 +579,20 @@ void Decide_Command(Vector2 key_pos_1, Vector2 *key_pos_2, bool *command_flag, b
 	}
 }
 
+//カーソルにあったコマンドを入力するもの、入力後のカーソルの場所も指定する（片方のみ）
+//(今選択してるコマンドのカーソルの座標、次選択するコマンドのカーソルの座標、何番目のコマンドを決定したか、どの行動をしたか、カーソルがいける限界のY座標、１コマンド間のカーソルの移動量、コマンドの数、カーソルがいける限界のX座標、１コマンド間のカーソルの移動量、コマンドの数)
+void Decide_Command_2(Vector2 key_pos_1, Vector2 *key_pos_2, bool *command_flag, bool *behavior_flag, float max_y, float move_y, int comand_y, float max_x, float move_x, int comand_x, Vector2 setpos, Music music)
+{
+	if (getKey(KEY_INPUT_RETURN) == KEY_STATE_PUSHDOWN && Cursor(key_pos_1.y, max_y + (move_y * comand_y))
+		|| Cursor(key_pos_1.x, max_x + (move_x * comand_x)))
+	{
+		music.cursor_enter();
+		*command_flag = true;
+		*behavior_flag = true;
+		*key_pos_2 = VectorGet(setpos.x, setpos.y);
+	}
+}
+
 //ひとつ前のコマンドに戻るもの
 //(どの行動をしたか、何番目のコマンドを決定したか、コマンドの数)
 void Command_Back(bool *behavior_flag, bool *command_flag, int max_command, Music music)
@@ -643,6 +657,13 @@ void Count_Draw_2D(int *number_graph, int draw_count, float x, float y, float si
 		DrawRotaGraph((int)x, (int)y, size_rate, 0.0f, number_graph[draw_count / 100], TRUE);
 		DrawRotaGraph((int)(x + ((NUMBER_SIZE_X - 10) * size_rate)), (int)y, size_rate, 0.0f, number_graph[draw_count / 10 % 10], TRUE);
 		DrawRotaGraph((int)(x + (((NUMBER_SIZE_X - 10) * 2) * size_rate)), (int)y, size_rate, 0.0f, number_graph[draw_count % 10], TRUE);
+	}
+	else if(draw_count < 10000)
+	{
+		DrawRotaGraph((int)x, (int)y, size_rate, 0.0f, number_graph[draw_count / 1000], TRUE);
+		DrawRotaGraph((int)(x + ((NUMBER_SIZE_X - 10) * size_rate)), (int)y, size_rate, 0.0f, number_graph[draw_count / 100 % 10], TRUE);
+		DrawRotaGraph((int)(x + (((NUMBER_SIZE_X - 10) * 2) * size_rate)), (int)y, size_rate, 0.0f, number_graph[draw_count / 10 % 10], TRUE);
+		DrawRotaGraph((int)(x + (((NUMBER_SIZE_X - 10) * 3) * size_rate)), (int)y, size_rate, 0.0f, number_graph[draw_count % 10], TRUE);
 	}
 }
 

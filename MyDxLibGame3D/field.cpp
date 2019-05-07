@@ -23,7 +23,7 @@ void Field::Init()
 	now_frame[0] = 0;
 	menu_pos[0] = VectorGet(-MENU_WINDOW_SIZE_X_0, 50.0f);
 	menu_pos[1] = VectorGet(50.0f, (float)SCREEN_H + 10.0f);
-	key_pos[0] = VectorGet(menu_pos[0].x + 55.0f, menu_pos[0].y + 52.5f);
+	key_pos[0] = VectorGet(menu_pos[0].x + KEY_POS_X_0, menu_pos[0].y + KEY_POS_Y_0);
 	for (int i = 0; i < 3; i++)
 	{
 		command_flag[i] = false;
@@ -45,11 +45,11 @@ void Field::Updata(Player *player, Music music)
 			{
 				if (i != 2)
 				{
-					Decide_Command(key_pos[i],
+					Decide_Command_2(key_pos[i],
 						&key_pos[i + 1],
 						&command_flag[i], &behavior_flag[i],
-						KEY_1ST_COMMAND_Y + KEY_POS_Y_0, KEY_1ST_MOVE_Y, 0,
-						KEY_1ST_COMMAND_X + KEY_POS_X_0, 0, 0,
+						menu_pos[0].y + KEY_POS_Y_0, KEY_MOVE_Y_0, 0,
+						menu_pos[0].x + KEY_POS_X_0, 0, 0,
 						VectorGet(KEY_2ND_COMMAND_X + KEY_2ND_POS_X, KEY_2ND_COMMAND_Y + KEY_2ND_POS_Y), music);
 				}
 			}

@@ -537,7 +537,7 @@ void Battle::Damage_Adjustment(int *damege)
 		*damege = *damege + GetRand(80);
 		*damege = *damege + GetRand(-40);
 	}
-	else if (*damege > 400 && *damege <= 999)
+	else if (*damege > 400 && *damege <= 900)
 	{
 		*damege = *damege + GetRand(100);
 		*damege = *damege + GetRand(-50);

@@ -52,18 +52,23 @@ bool Save::FileLoader(const char * _filename, const int line_num)
 	//列保存
 	std::string line;
 	//ファイルの最後までループ
+	int lineIndex = 0;
 	while (getline(ifs, line))
 	{
 		//ここでカンマ区切りで読み込み
 		std::vector<std::string> strvec = Split(line, ',');
 
-		for (int i = 0; i < line_num; i++)
+		for (int row = 0; row < (int)strvec.size(); row++)
 		{
-			for (int row = 0; row < (int)strvec.size(); row++)
-			{
-				//数字に変換（string ==> int）
-				m_data_case_2[row][i] = stoi(strvec.at(row));
-			}
+			//数字に変換（string ==> int）
+			m_data_case_2[row][lineIndex] = stoi(strvec.at(row));
+		}
+		++lineIndex;
+
+		if (lineIndex > line_num)
+		{
+			// 警告
+			break;
 		}
 	}
 	return true;
