@@ -910,20 +910,21 @@ void Battle::Playing_Move(Chara *ally, Chara *enemy, int ally_num, int enemy_num
 					{
 						if (ally[i].second_behavior_flag[skill])
 						{
-							Hit_And_Awey(&ally[i], enemy, &ally[i].chara_move_flag2, &ally[i].chara_move_flag3, enemy_num);
+							//Hit_And_Awey(&ally[i], enemy, &ally[i].chara_move_flag2, &ally[i].chara_move_flag3, enemy_num);
 						}
 						if (ally[i].second_behavior_flag[magic])
 						{
-							Hit_And_Awey(&ally[i], enemy, &ally[i].chara_move_flag2, &ally[i].chara_move_flag3, enemy_num);
+							//Hit_And_Awey(&ally[i], enemy, &ally[i].chara_move_flag2, &ally[i].chara_move_flag3, enemy_num);
 						}
 						if (ally[i].second_behavior_flag[item])
 						{
-							Hit_And_Awey(&ally[i], enemy, &ally[i].chara_move_flag2, &ally[i].chara_move_flag3, enemy_num);
+							//Hit_And_Awey(&ally[i], enemy, &ally[i].chara_move_flag2, &ally[i].chara_move_flag3, enemy_num);
 						}
 					}
 				}
 				if (ally[i].second_behavior_flag[skill])
 				{
+					Hit_And_Awey(&ally[i], enemy, &ally[i].chara_move_flag2, &ally[i].chara_move_flag3, enemy_num);
 				}
 				if (ally[i].second_behavior_flag[magic])
 				{

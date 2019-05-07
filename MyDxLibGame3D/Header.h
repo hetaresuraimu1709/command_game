@@ -23,10 +23,11 @@
 #include "Npc.h"
 #include "Window.h"
 #include "Field.h"
+#include "Save.h"
 
 //function.cppで作った関数のプロトタイプ宣言
 void Turn_Around(float &now_dir, float max_dir, float speed_dir, bool &turn_flag);
-void Chara_Status_Load(Chara *chara, int num);
+void Chara_Status_Load(Chara *chara, int chara_num);
 Chara Status_Get(std::string chara_name, char *file_name, Vector3 f_pos, Vector3 b_pos, int _hp, int _mp, int _pow, int _def, int _m_pow, int _m_res, int _ski, int _spd, int _exp, bool ally_or_enemy_flag);
 Inventory Inventory_Have_Get(Inventory Inve[6], Inventory one, Inventory two, Inventory three, Inventory four, Inventory five, Inventory six);
 Inventory Inventory_Get(int number, bool use_flag, int damage_bonus, int force, std::string name);
@@ -68,4 +69,6 @@ void Count_Draw_2D(int *number_graph, int draw_count, float x, float y, float si
 void Count_Draw_3D(int *number_graph, int draw_count, float x, float y, float z);
 void Enemy_Count_Draw_3D(int *number_graph, int draw_count, float x, float y, float z);
 void Set_HPber(float pos_x, float pos_y, float rate, int color);
+void Pos_Adjustment(Vector2 *pos);
+void Pos_Adjustment(Vector3 *pos);
 #endif // _HEADER_H_

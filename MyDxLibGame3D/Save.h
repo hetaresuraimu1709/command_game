@@ -1,6 +1,6 @@
-//Battle.h
-#ifndef _BATTLE_H_
-#define _BATTLE_H_
+//Save.h
+#ifndef _SAVE_H_
+#define _SAVE_H_
 
 #include "DxLib.h"
 #include <fstream>
@@ -8,13 +8,15 @@
 #include <sstream>
 #include <vector>
 
-class LoadFile
+class Save
 {
 public:
-	~LoadFile();
-	static LoadFile* GetInstance();
+	~Save();
+	static Save* GetInstance();
 
 	bool FileLoader(const char *_filename);
+
+	bool FileLoader(const char * _filename, const int line_num);
 
 	int FileGeter(const int col, const int row);
 
@@ -22,22 +24,20 @@ public:
 
 	bool Filewritier(const char *_filename, const float data);
 
-	bool Filewritier(const char *_filename, const int data);
-
-	bool Filewritier(const char *_filename, const int size, const int *data);
+	bool Filewritier(const char *_filename, const int size, const float *data);
 
 private:
-	LoadFile();
+	Save();
 	std::vector<std::string> Split(std::string &input, char split);
 
-	static LoadFile* save_instance;
+	static Save* save_instance;
 
 	int m_data_case_1[256];
 	int m_data_case_2[256][256];
 
 };
 
-#define LOAD_FILE LoadFile::GetInstance()
+#define LOAD_FILE Save::GetInstance()
 
 
 #endif

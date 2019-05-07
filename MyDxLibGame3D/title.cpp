@@ -50,7 +50,7 @@ Title::Title()
 	anim_frame = 0;
 	gamestart_pos = VectorGet(800.0f, (float)((SCREEN_H / 2) + 350));
 	cursor_pos = VectorGet(gamestart_pos.x - 20.0f, gamestart_pos.y + 10.0f);
-	command = Get_Graph("data/command/command_3.png", VectorGet(gamestart_pos.x + 150.0f, gamestart_pos.y + 50.0f), 1.0f);
+	window_pos = VectorGet(gamestart_pos.x - 220.0f, gamestart_pos.y - 50.0f);
 }
 
 Title::~Title()
@@ -97,7 +97,7 @@ void Title::Move(int *scene, Music *music, bool *game_end_flag)
 	}
 }
 
-void Title::Draw(Comment_string *comment, Music *music)
+void Title::Draw(Comment_string *comment, Music *music, Window *window)
 {
 	//アニメーション用カウント
 	anim_count++;
@@ -119,7 +119,7 @@ void Title::Draw(Comment_string *comment, Music *music)
 	{
 		DrawRotaGraph((int)suraimu[i].pos.x, (int)suraimu[i].pos.y, (double)suraimu[i].enl, 0.0f, suraimu[i].graph, true);
 	}
-	DrawRotaGraph((int)command.pos.x, (int)command.pos.y, (double)command.enl, 0.0f, command.graph, true);
+	window->Command_Draw(window_pos.x, window_pos.y, KEY_3RD_COMMAND_SIZE_X, KEY_3RD_COMMAND_SIZE_Y);
 	comment->Draw(gamestart_pos.x, gamestart_pos.y, "げーむすたーと！");
 	comment->Draw(gamestart_pos.x, gamestart_pos.y + 100.0f, "げーむおわり！");
 	DrawGraph((int)cursor_pos.x, (int)cursor_pos.y, cursor_graph[anim_frame], true);

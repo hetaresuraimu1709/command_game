@@ -8,7 +8,6 @@ class Player;
 class Camera
 {
 public:
-
 	Vector3 f_pos,b_pos,up;//ç¿ïW
 	VECTOR sight_point;
 	float VRotate, HRotate, TRotate;

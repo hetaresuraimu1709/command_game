@@ -36,7 +36,7 @@ void Camera::Init()
 	}
 	turn_flag = false;
 	reset_flag = false;
-	reset_flag = false;
+	ones_flag = false;
 }
 
 void Camera::Flag_Reset(Player &player)
@@ -60,7 +60,7 @@ void Camera::Sight_Point_Flag_Reset()
 		sight_point_flag[i] = false;
 	}
 	reset_flag = false;
-	reset_flag = false;
+	ones_flag = false;
 }
 
 void Move_Smooth(Vector3 *origin_vector, Vector3 goal_vector,float cut)
@@ -291,6 +291,15 @@ void Camera::Battle_Move(Player &player, Enemy &enemy, Battle &battle, Map *map)
 						}
 						else
 						{
+							for (int j = 0; j < 4; j++)
+							{
+								if (battle.m_ally[i].who_command_flag[j])
+								{
+									float camera_setpos_x = battle.m_enemy[j].b_pos.x;
+									float camera_setpos_z = battle.m_enemy[j].b_pos.z + 10.0f;
+									Move_Smooth(&b_pos, VectorGet(camera_setpos_x, 15.f, camera_setpos_z), 0.01f);
+								}
+							}
 							if (!ones_flag)
 							{
 								//–¡•û‚ð³–Ê‚©‚ç‚Ý‚Â‚Â
@@ -299,14 +308,12 @@ void Camera::Battle_Move(Player &player, Enemy &enemy, Battle &battle, Map *map)
 								{
 									if (battle.m_ally[i].who_command_flag[j])
 									{
-										float camera_sight_x = battle.m_enemy[j].b_pos.x;
-										float camera_sight_z = battle.m_enemy[j].b_pos.z;
-										sight_point = VGet(camera_sight_x, 15.0f, camera_sight_z);
+										VECTOR camera_sight = VGet(battle.m_enemy[j].b_pos.x, battle.m_enemy[j].b_pos.y, battle.m_enemy[j].b_pos.z);
+										sight_point = camera_sight;
 									}
 								}
 								ones_flag = true;
 							}
-
 							b_pos.z += 0.05f;
 						}
 					}

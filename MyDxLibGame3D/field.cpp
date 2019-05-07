@@ -43,7 +43,7 @@ void Field::Updata(Player *player, Music music)
 			Set_Move_Cursor(&key_pos[i].y, KEY_INPUT_W, KEY_INPUT_S, menu_pos[i].y + 52.5f, KEY_MAX_COMMAND_0, KEY_MOVE_Y_0, &key_count[0], &key_count[1], music);
 			if (!command_flag[i])
 			{
-				/*if (i != 2)
+				if (i != 2)
 				{
 					Decide_Command(key_pos[i],
 						&key_pos[i + 1],
@@ -51,7 +51,7 @@ void Field::Updata(Player *player, Music music)
 						KEY_1ST_COMMAND_Y + KEY_POS_Y_0, KEY_1ST_MOVE_Y, 0,
 						KEY_1ST_COMMAND_X + KEY_POS_X_0, 0, 0,
 						VectorGet(KEY_2ND_COMMAND_X + KEY_2ND_POS_X, KEY_2ND_COMMAND_Y + KEY_2ND_POS_Y), music);
-				}*/
+				}
 			}
 		}
 	}

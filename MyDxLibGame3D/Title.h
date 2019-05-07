@@ -17,11 +17,10 @@ public:
 	Title();//コンストラクタ
 	~Title();//デストラクタ
 	void Move(int *scene, Music *music, bool *game_end_flag);//動き
-	void Draw(Comment_string *comment, Music *music);//描画
+	void Draw(Comment_string *comment, Music *music, Window *window);//描画
 private:
 	Graph main_title;
 	Graph title_back;
-	Graph command;
 	Graph miffy[3];
 	Graph suraimu[2];
 	int cursor_graph[8];
@@ -29,6 +28,7 @@ private:
 	int anim_frame;
 	Vector2 gamestart_pos;
 	Vector2 cursor_pos;
+	Vector2 window_pos;
 };
 
 class End

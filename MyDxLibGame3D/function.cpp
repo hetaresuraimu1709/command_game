@@ -81,15 +81,15 @@ void Turn_Around(float &now_dir, float aim_dir, float speed_dir, bool &turn_flag
 	}
 }
 
-void Chara_Status_Load(Chara *chara ,int num)
+void Chara_Status_Load(Chara *chara ,int chara_num)
 {
-	LOAD_FILE->FileLoader("data/save/chara_stats_1.csv");
+	LOAD_FILE->FileLoader("data/save/chara_stats.csv");
 
-	for (int j = 0; j < num; j++)
+	for (int j = 0; j < chara_num; j++)
 	{
 		for (int i = 0; i < 13; i++)
 		{
-			chara[j].status[i] = LOAD_FILE->FileGeter(j, i);
+			chara[j].status[i] = LOAD_FILE->FileGeter(j,i);
 		}
 	}
 }
@@ -650,4 +650,60 @@ void Set_HPber(float pos_x, float pos_y, float rate, int color)
 	DrawBox((int)(pos_x - 5), (int)(pos_y - 5), (int)(pos_x + 155), (int)(pos_y + 35), GetColor(200, 200, 200), true);
 	DrawBox((int)(pos_x), (int)(pos_y), (int)(pos_x + 150), (int)(pos_y + 30), GetColor(100, 0, 0), true);
 	DrawBox((int)(pos_x), (int)(pos_y), (int)(pos_x + (150 * rate)), (int)(pos_y + 30), color, true);
+}
+
+void Pos_Adjustment(Vector2 *pos)
+{
+	printfDx("%f %f\n", pos->x, pos->y);
+	if (CheckHitKey(KEY_INPUT_UP))
+	{
+		pos->y--;
+	}
+	if (CheckHitKey(KEY_INPUT_DOWN))
+	{
+		pos->y++;
+	}
+	if (CheckHitKey(KEY_INPUT_LEFT))
+	{
+		pos->x--;
+	}
+	if (CheckHitKey(KEY_INPUT_RIGHT))
+	{
+		pos->x++;
+	}
+}
+
+void Pos_Adjustment(Vector3 *pos)
+{
+	printfDx("%f %f %f\n", pos->x, pos->y, pos->z);
+	if (CheckHitKey(KEY_INPUT_UP))
+	{
+		if (CheckHitKey(KEY_INPUT_Z))
+		{
+			pos->z++;
+		}
+		else
+		{
+			pos->y--;
+		}
+	}
+	if (CheckHitKey(KEY_INPUT_DOWN))
+	{
+		if (CheckHitKey(KEY_INPUT_Z))
+		{
+			pos->z--;
+		}
+		else
+		{
+			pos->y++;
+		}
+	}
+	if (CheckHitKey(KEY_INPUT_LEFT))
+	{
+		pos->x--;
+	}
+	if (CheckHitKey(KEY_INPUT_RIGHT))
+	{
+		pos->x++;
+	}
 }
