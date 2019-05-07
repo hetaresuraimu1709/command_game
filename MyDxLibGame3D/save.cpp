@@ -97,7 +97,7 @@ bool Save::Filewritier(const char * _filename, const int size, const float * dat
 
 	for (int i = 0; i < size; i++)
 	{
-		fout << data << "," << std::flush;
+		fout << data[i] << "," << std::flush;
 	}
 	return true;
 }

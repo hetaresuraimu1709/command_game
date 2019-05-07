@@ -80,12 +80,62 @@ void Turn_Around(float &now_dir, float aim_dir, float speed_dir, bool &turn_flag
 		}
 	}
 }
+//ステータスチェック
+void Status_Check(int *data1, int *data2, int *data3)
+{
+	for (int i = 0; i < 13; i++)
+	{
+		switch (i)
+		{
+		case 0:
+			printfDx("Lv. ");
+			break;
+		case 1:
+			printfDx("MHP ");
+			break;
+		case 2:
+			printfDx("HP  ");
+			break;
+		case 3:
+			printfDx("MMP ");
+			break;
+		case 4:
+			printfDx("MP  ");
+			break;
+		case 5:
+			printfDx("POW ");
+			break;
+		case 6:
+			printfDx("DEF ");
+			break;
+		case 7:
+			printfDx("MPW ");
+			break;
+		case 8:
+			printfDx("MRS ");
+			break;
+		case 9:
+			printfDx("SKI ");
+			break;
+		case 10:
+			printfDx("SPD ");
+			break;
+		case 11:
+			printfDx("EXP ");
+			break;
+		case 12:
+			printfDx("EXG ");
+			break;
+		}
+		printfDx("%d  %d  %d\n", data1[i], data2[i], data3[i]);
+	}
+}
 
-void Chara_Status_Load(Chara *chara ,int chara_num)
+void Chara_Status_Load(Chara *chara ,int num)
 {
 	LOAD_FILE->FileLoader("data/save/chara_stats.csv");
 
-	for (int j = 0; j < chara_num; j++)
+	for (int j = 0; j < num; j++)
 	{
 		for (int i = 0; i < 13; i++)
 		{
@@ -95,14 +145,9 @@ void Chara_Status_Load(Chara *chara ,int chara_num)
 }
 void Chara_Status_Save(Chara *chara, int num)
 {
-	LOAD_FILE->FileLoader("data/save/chara_stats_1.csv");
-
 	for (int j = 0; j < num; j++)
 	{
-		for (int i = 0; i < 13; i++)
-		{
-			chara[j].status[i] = LOAD_FILE->FileGeter(j, i);
-		}
+		//LOAD_FILE->Filewritier("data/save/chara_stats_1.csv", 13, chara[j].status);
 	}
 }
 
