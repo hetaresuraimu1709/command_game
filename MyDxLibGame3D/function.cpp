@@ -147,7 +147,7 @@ void Chara_Status_Save(Chara *chara, int num)
 {
 	for (int j = 0; j < num; j++)
 	{
-		LOAD_FILE->Filewritier("data/save/chara_stats_1.csv", 13, chara[j].status);
+		//LOAD_FILE->Filewritier("data/save/chara_stats.csv", chara[j].status);
 	}
 }
 
